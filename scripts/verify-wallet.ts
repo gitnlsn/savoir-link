@@ -16,6 +16,7 @@ function mockPagarme(): PagarmeClient {
       checkoutUrl: `https://sandbox.pagar.me/checkout/${input.code}`,
       status: "pending",
     }),
+    getOrder: async (id: string) => ({ id, status: "paid" }),
   } as unknown as PagarmeClient;
 }
 
@@ -47,7 +48,7 @@ async function main() {
     type: "charge.paid",
     data: { id: `ch_${nanoid(8)}`, order: { id: payment.pagarmeOrderId!, code: payment.id } },
   };
-  await new HandlePagarmeWebhookUseCase({ db, logger }).execute(evt);
+  await new HandlePagarmeWebhookUseCase({ db, logger, pagarme }).execute(evt);
 
   const w1 = await new GetWalletUseCase({ db }).execute(user.id);
   assert(w1.balance === 15, `wallet credited to 15 (got ${w1.balance})`);

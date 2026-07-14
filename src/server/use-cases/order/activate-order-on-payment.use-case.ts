@@ -32,19 +32,20 @@ export class ActivateOrderOnPaymentUseCase {
       logger.warn("activate-order: payment has no order", { paymentId });
       return { orderId: null };
     }
-    if (payment.order.status === OrderStatus.ACTIVE) {
-      return { orderId: payment.order.id }; // already fulfilled
-    }
-
     const now = new Date();
     const expiresAt = new Date(
       now.getTime() + payment.order.durationDays * 24 * 60 * 60 * 1000,
     );
 
-    await db.order.update({
-      where: { id: payment.order.id },
+    // Atomic transition: only the delivery that actually flips the order to ACTIVE proceeds to
+    // send the email. A concurrent/duplicate delivery updates 0 rows and no-ops (no double email).
+    const transition = await db.order.updateMany({
+      where: { id: payment.order.id, status: { not: OrderStatus.ACTIVE } },
       data: { status: OrderStatus.ACTIVE, publishedAt: now, expiresAt },
     });
+    if (transition.count === 0) {
+      return { orderId: payment.order.id }; // already active — nothing to do
+    }
 
     if (payment.status !== PaymentStatus.PAID) {
       await db.payment.update({

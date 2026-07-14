@@ -186,6 +186,10 @@ model CreditTransaction {
 
     createdAt DateTime @default(now())
 
+    // Idempotency guard: a given payment can only produce one TOPUP credit, even under
+    // concurrent/duplicate webhook deliveries. (UNLOCK rows have a null paymentId, and Postgres
+    // treats NULLs as distinct, so this does not constrain unlock ledger entries.)
+    @@unique([paymentId, type])
     @@index([walletId, createdAt])
 }
 

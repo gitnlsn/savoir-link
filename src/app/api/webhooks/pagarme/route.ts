@@ -4,6 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { env } from "~/env";
 import { logger } from "~/lib/logger";
 import { db } from "~/server/db";
+import { getPagarmeClient } from "~/server/integrations/pagarme/pagarme.client";
 import type { PagarmeWebhookPayload } from "~/server/integrations/pagarme/types";
 import { HandlePagarmeWebhookUseCase } from "~/server/use-cases/payment/handle-pagarme-webhook.use-case";
 
@@ -13,16 +14,21 @@ export const runtime = "nodejs";
 /**
  * Pagar.me webhook endpoint.
  *
- * Security: Pagar.me signs webhook deliveries with HTTP Basic auth (username/password configured
- * when registering the endpoint). We verify those credentials with a timing-safe comparison when
- * configured. Fulfillment is idempotent (see HandlePagarmeWebhookUseCase).
+ * Security is layered: (1) optional HTTP Basic auth (verified with a timing-safe comparison when
+ * WEBHOOK_AUTH_* are configured), and (2) the authoritative guard — before granting anything the
+ * handler re-fetches the order from Pagar.me and confirms it is actually paid (see
+ * HandlePagarmeWebhookUseCase). A forged/replayed event therefore cannot produce value.
  */
 export async function POST(request: NextRequest) {
-  // 1. Basic auth (if configured).
+  // 1. Basic auth (defense-in-depth; when configured).
   if (env.WEBHOOK_AUTH_USERNAME && env.WEBHOOK_AUTH_PASSWORD) {
     if (!isAuthorized(request)) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+  } else if (env.NODE_ENV === "production") {
+    // Fail loud: in production the webhook must be authenticated.
+    logger.error("Webhook auth not configured in production (WEBHOOK_AUTH_*)");
+    return NextResponse.json({ error: "Webhook auth not configured" }, { status: 503 });
   }
 
   // 2. Parse payload.
@@ -33,15 +39,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  if (!payload?.id || !payload?.type) {
+  // Malformed payloads are non-retryable → 400 (so Pagar.me doesn't loop).
+  if (!payload?.id || !payload?.type || !payload?.data) {
     return NextResponse.json({ error: "Malformed payload" }, { status: 400 });
   }
 
-  // 3. Process (idempotent). Always ack 2xx so Pagar.me stops retrying processed events.
+  // 3. Process (idempotent). Ack 2xx on success; 500 on retryable errors so Pagar.me redelivers.
   try {
-    const result = await new HandlePagarmeWebhookUseCase({ db, logger }).execute(
-      payload,
-    );
+    const result = await new HandlePagarmeWebhookUseCase({
+      db,
+      logger,
+      pagarme: getPagarmeClient(),
+    }).execute(payload);
     return NextResponse.json({ received: true, ...result });
   } catch (error) {
     logger.error("Webhook processing error", {

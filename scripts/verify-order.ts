@@ -17,6 +17,7 @@ function mockPagarme(): PagarmeClient {
       checkoutUrl: `https://sandbox.pagar.me/checkout/${input.code}`,
       status: "pending",
     }),
+    getOrder: async (id: string) => ({ id, status: "paid" }),
   } as unknown as PagarmeClient;
 }
 
@@ -55,7 +56,7 @@ async function main() {
     type: "order.paid",
     data: { id: payment.pagarmeOrderId!, code: payment.id, status: "paid" },
   };
-  await new HandlePagarmeWebhookUseCase({ db, logger }).execute(evt);
+  await new HandlePagarmeWebhookUseCase({ db, logger, pagarme }).execute(evt);
   const active = await db.order.findUniqueOrThrow({ where: { id: order.id } });
   assert(active.status === "ACTIVE", `order ACTIVE after paid (got ${active.status})`);
 
