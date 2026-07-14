@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Post a Job - ServiceHub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0052ff",
+                        "background": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "inverse-primary": "#b7c4ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-container": "#5153de",
+                        "outline-variant": "#c3c5d9",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-surface": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary": "#006c49",
+                        "tertiary-fixed": "#e1e0ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#434656",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed": "#dde1ff",
+                        "primary": "#003ec7",
+                        "error-container": "#ffdad6",
+                        "outline": "#737688",
+                        "on-tertiary-container": "#e3e2ff",
+                        "inverse-surface": "#213145",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#00714d",
+                        "tertiary": "#3737c5",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#6cf8bb",
+                        "on-primary-container": "#dfe3ff",
+                        "surface-tint": "#004ced",
+                        "primary-fixed-dim": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "xxl": "48px",
+                        "xxxl": "64px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["10px", {"lineHeight": "12px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 h-16">
+<div class="flex items-center justify-between px-md h-full w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-200" onclick="history.back()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-display text-headline-sm font-extrabold text-primary">ServiceHub</h1>
+</div>
+<div class="hidden md:flex gap-8 items-center">
+<span class="text-on-surface-variant font-label-lg">Need Help?</span>
+<img class="w-8 h-8 rounded-full border-2 border-primary/20" data-alt="A clean, professional portrait of a customer service representative wearing a sleek headset, set against a blurred modern office background with soft blue lighting to match the ServiceHub professional identity." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</header>
+<main class="flex-1 mt-16 pb-24 md:pb-8 flex flex-col items-center">
+<!-- Progress Header -->
+<section class="w-full max-w-2xl px-margin-mobile md:px-0 py-8">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-lg text-primary uppercase tracking-widest" id="step-label">Step 1 of 4</span>
+<span class="font-headline-sm text-on-surface" id="step-name">Service Type</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container transition-all duration-500 ease-out" id="progress-bar" style="width: 25%"></div>
+</div>
+</section>
+<!-- Form Canvas -->
+<section class="w-full max-w-2xl px-margin-mobile md:px-0">
+<form class="space-y-8" id="job-form">
+<!-- Step 1: Service Type -->
+<div class="step-content" id="step-1">
+<h2 class="font-headline-md mb-6 text-on-surface">What do you need help with?</h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+<label class="group relative cursor-pointer">
+<input checked="" class="peer sr-only" name="service_type" type="radio" value="plumbing"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">plumbing</span>
+<p class="font-label-lg block">Plumbing</p>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="service_type" type="radio" value="electrical"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">electrical_services</span>
+<p class="font-label-lg block">Electrical</p>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="service_type" type="radio" value="cleaning"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">cleaning_services</span>
+<p class="font-label-lg block">Cleaning</p>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="service_type" type="radio" value="moving"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">local_shipping</span>
+<p class="font-label-lg block">Moving</p>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="service_type" type="radio" value="gardening"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">yard</span>
+<p class="font-label-lg block">Gardening</p>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="service_type" type="radio" value="other"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all group-hover:border-primary peer-checked:border-primary peer-checked:bg-surface-container-low peer-checked:ring-2 peer-checked:ring-primary/20 shadow-sm">
+<span class="material-symbols-outlined text-4xl text-primary mb-3">more_horiz</span>
+<p class="font-label-lg block">Other</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Step 2: Description & Location -->
+<div class="step-content hidden" id="step-2">
+<h2 class="font-headline-md mb-6 text-on-surface">Tell us about the project</h2>
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-label-lg block text-on-surface-variant" for="description">Project Description</label>
+<textarea class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary-container focus:border-primary transition-all outline-none resize-none" id="description" placeholder="Be as descriptive as possible. For example: 'Leaking pipe under kitchen sink needs repair...'" rows="4"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-lg block text-on-surface-variant" for="zipcode">ZIP Code</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary-container focus:border-primary transition-all outline-none" id="zipcode" placeholder="e.g. 90210" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 3: Urgency & Date -->
+<div class="step-content hidden" id="step-3">
+<h2 class="font-headline-md mb-6 text-on-surface">When do you need it done?</h2>
+<div class="grid grid-cols-1 gap-4">
+<label class="flex items-center p-4 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-surface-container-low shadow-sm group">
+<input checked="" class="w-5 h-5 text-primary focus:ring-primary" name="urgency" type="radio" value="asap"/>
+<div class="ml-4">
+<p class="font-label-lg text-on-surface">As soon as possible</p>
+<p class="text-body-sm text-on-surface-variant">Urgent matter, needs attention within 24 hours.</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 group-has-[:checked]:opacity-100 transition-opacity">bolt</span>
+</label>
+<label class="flex items-center p-4 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-surface-container-low shadow-sm group">
+<input class="w-5 h-5 text-primary focus:ring-primary" name="urgency" type="radio" value="next_few_days"/>
+<div class="ml-4">
+<p class="font-label-lg text-on-surface">In the next few days</p>
+<p class="text-body-sm text-on-surface-variant">Flexible schedule within the week.</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 group-has-[:checked]:opacity-100 transition-opacity">calendar_month</span>
+</label>
+<label class="flex items-center p-4 rounded-xl border border-outline-variant bg-surface-container-lowest cursor-pointer hover:border-primary transition-all has-[:checked]:border-primary has-[:checked]:bg-surface-container-low shadow-sm group">
+<input class="w-5 h-5 text-primary focus:ring-primary" name="urgency" type="radio" value="specific_date"/>
+<div class="ml-4">
+<p class="font-label-lg text-on-surface">Specific Date</p>
+<p class="text-body-sm text-on-surface-variant">I have a preferred date and time in mind.</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-primary opacity-0 group-has-[:checked]:opacity-100 transition-opacity">event</span>
+</label>
+</div>
+</div>
+<!-- Step 4: Budget Range -->
+<div class="step-content hidden" id="step-4">
+<h2 class="font-headline-md mb-6 text-on-surface">What is your budget range?</h2>
+<p class="text-body-md text-on-surface-variant mb-8">This helps us match you with the best professionals in your price bracket.</p>
+<div class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="budget" type="radio" value="economy"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all peer-checked:border-primary peer-checked:bg-primary-container peer-checked:text-on-primary shadow-sm">
+<p class="font-headline-sm mb-1">$50 - $150</p>
+<p class="font-label-md opacity-80 uppercase">Economy</p>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="budget" type="radio" value="standard"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all peer-checked:border-primary peer-checked:bg-primary-container peer-checked:text-on-primary shadow-sm">
+<p class="font-headline-sm mb-1">$150 - $500</p>
+<p class="font-label-md opacity-80 uppercase">Standard</p>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="budget" type="radio" value="premium"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all peer-checked:border-primary peer-checked:bg-primary-container peer-checked:text-on-primary shadow-sm">
+<p class="font-headline-sm mb-1">$500 - $1,500</p>
+<p class="font-label-md opacity-80 uppercase">Premium</p>
+</div>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="budget" type="radio" value="custom"/>
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest text-center transition-all peer-checked:border-primary peer-checked:bg-primary-container peer-checked:text-on-primary shadow-sm">
+<p class="font-headline-sm mb-1">Custom</p>
+<p class="font-label-md opacity-80 uppercase">Request Quote</p>
+</div>
+</label>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-primary/10 flex gap-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-body-sm text-on-surface-variant">Providing a budget helps professionals offer more accurate quotes and speeds up the response time.</p>
+</div>
+</div>
+</div>
+<!-- Form Controls -->
+<div class="flex items-center justify-between pt-8 border-t border-outline-variant">
+<button class="hidden px-8 py-3 rounded-lg font-label-lg text-primary hover:bg-surface-container-high transition-colors active:scale-95 duration-200" id="prev-btn" type="button">
+                        Back
+                    </button>
+<div class="flex-1"></div>
+<button class="px-10 py-4 bg-primary text-on-primary rounded-lg font-label-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-200" id="next-btn" type="button">
+                        Continue
+                    </button>
+<button class="hidden px-10 py-4 bg-secondary text-on-secondary rounded-lg font-label-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-200" id="submit-btn" type="submit">
+                        Post Job
+                    </button>
+</div>
+</form>
+</section>
+<!-- Success Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-on-surface/40 backdrop-blur-sm hidden" id="success-modal">
+<div class="bg-surface-container-lowest w-full max-w-md rounded-2xl p-8 shadow-2xl text-center scale-95 transition-transform duration-300">
+<div class="w-20 h-20 bg-secondary-container text-on-secondary-container rounded-full flex items-center justify-center mx-auto mb-6">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h3 class="font-headline-md mb-2">Job Posted Successfully!</h3>
+<p class="text-body-md text-on-surface-variant mb-8">We're notifying top-rated professionals in your area. You'll receive quotes shortly.</p>
+<button class="w-full py-4 bg-primary text-on-primary rounded-lg font-label-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-200" onclick="window.location.reload()">
+                    Go to Dashboard
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation (Hidden on Dashboard for focused task) -->
+<!-- Suppressed based on "Task-Focused" rule in system instructions -->
+<script>
+        const totalSteps = 4;
+        let currentStep = 1;
+
+        const steps = [
+            { id: 'step-1', name: 'Service Type' },
+            { id: 'step-2', name: 'Details' },
+            { id: 'step-3', name: 'Schedule' },
+            { id: 'step-4', name: 'Budget' }
+        ];
+
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const stepLabel = document.getElementById('step-label');
+        const stepName = document.getElementById('step-name');
+        const jobForm = document.getElementById('job-form');
+        const successModal = document.getElementById('success-modal');
+
+        function updateStepUI() {
+            // Update Text
+            stepLabel.innerText = `Step ${currentStep} of ${totalSteps}`;
+            stepName.innerText = steps[currentStep - 1].name;
+            
+            // Update Progress
+            const progress = (currentStep / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // Toggle visibility
+            document.querySelectorAll('.step-content').forEach((el, index) => {
+                if (index === currentStep - 1) {
+                    el.classList.remove('hidden');
+                    el.classList.add('animate-in', 'fade-in', 'duration-500');
+                } else {
+                    el.classList.add('hidden');
+                }
+            });
+
+            // Toggle Buttons
+            if (currentStep === 1) {
+                prevBtn.classList.add('hidden');
+            } else {
+                prevBtn.classList.remove('hidden');
+            }
+
+            if (currentStep === totalSteps) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateStepUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        jobForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Show Success Modal
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+                successModal.querySelector('div').classList.remove('scale-95');
+                successModal.querySelector('div').classList.add('scale-100');
+            }, 50);
+        });
+
+        // Close modal on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !successModal.classList.contains('hidden')) {
+                window.location.reload();
+            }
+        });
+
+        // Visual Interaction: Handle radio selection clicks with scale effect
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const parent = radio.closest('label').querySelector('div');
+                parent.classList.add('scale-95');
+                setTimeout(() => parent.classList.remove('scale-95'), 150);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ServiceHub | Lead Marketplace</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0052ff",
+                        "background": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "inverse-primary": "#b7c4ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed": "#001452",
+                        "tertiary-container": "#5153de",
+                        "outline-variant": "#c3c5d9",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "on-surface": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary": "#006c49",
+                        "tertiary-fixed": "#e1e0ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#434656",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "on-primary": "#ffffff",
+                        "on-background": "#0b1c30",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-fixed": "#dde1ff",
+                        "primary": "#003ec7",
+                        "error-container": "#ffdad6",
+                        "outline": "#737688",
+                        "on-tertiary-container": "#e3e2ff",
+                        "inverse-surface": "#213145",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#00714d",
+                        "tertiary": "#3737c5",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#6cf8bb",
+                        "on-primary-container": "#dfe3ff",
+                        "surface-tint": "#004ced",
+                        "primary-fixed-dim": "#b7c4ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "container-max": "1280px",
+                        "lg": "24px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "xxl": "48px",
+                        "xxxl": "64px",
+                        "md": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Manrope"],
+                        "label-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "display": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["10px", {"lineHeight": "12px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9ff;
+            color: #0b1c30;
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d3e4fe;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex items-center justify-between px-md h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-200">
+                    grid_view
+                </button>
+<h1 class="font-display text-headline-md font-extrabold text-primary dark:text-primary-fixed">ServiceHub</h1>
+</div>
+<!-- Desktop Filter Nav -->
+<nav class="hidden md:flex items-center gap-xl">
+<button class="text-primary font-bold font-label-lg text-label-lg flex items-center gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+                    Search
+                </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg flex items-center gap-sm">
+<span class="material-symbols-outlined">assignment</span>
+                    Activity
+                </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors font-label-lg text-label-lg flex items-center gap-sm">
+<span class="material-symbols-outlined">person</span>
+                    Profile
+                </button>
+</nav>
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-xs px-md py-sm bg-primary text-on-primary rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Post Lead
+                </button>
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a service provider smiling confidently against a soft blue studio background. The lighting is crisp and professional, reflecting a high-end corporate aesthetic with clean lines and a friendly, reliable atmosphere." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Welcome & Lead Summary Section -->
+<section class="mb-xxl flex flex-col md:flex-row justify-between items-start md:items-end gap-lg">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Available Leads</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Find your next project. We've curated the best service requests in your area based on your profile expertise.</p>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-lowest p-xs rounded-xl border border-outline-variant/30 shadow-sm">
+<button class="px-md py-sm bg-primary-container text-white rounded-lg font-label-md text-label-md shadow-md shadow-primary-container/20">All Jobs</button>
+<button class="px-md py-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-label-md text-label-md transition-colors">Nearby</button>
+<button class="px-md py-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg font-label-md text-label-md transition-colors">Premium</button>
+</div>
+</section>
+<!-- Filters Bar -->
+<section class="mb-lg flex flex-wrap items-center gap-md">
+<div class="relative flex-1 min-w-[280px] md:max-w-md">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-md bg-white border border-outline-variant rounded-xl font-body-md text-body-md focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Search by job title or keyword..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-md bg-white border border-outline-variant rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                    Category
+                </button>
+<button class="flex items-center gap-xs px-md py-md bg-white border border-outline-variant rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">distance</span>
+                    25 miles
+                </button>
+<button class="flex md:hidden items-center justify-center w-12 h-12 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">tune</span>
+</button>
+</div>
+</section>
+<!-- Leads Bento Grid -->
+<section class="bento-grid pb-xxl">
+<!-- Lead Card 1: Premium/New -->
+<div class="group bg-white border border-outline-variant rounded-xl p-lg hover:shadow-md transition-all duration-300 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-secondary-container/20 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+                            New Lead
+                        </span>
+<span class="font-headline-sm text-headline-sm text-primary">$850 - $1,200</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Full Home Smart Automation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        North Hills, CA (4.2 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Electrical</span>
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Home Tech</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Verified Homeowner</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform hover:shadow-lg hover:shadow-primary/20">
+                        View Details
+                    </button>
+</div>
+</div>
+<!-- Lead Card 2 -->
+<div class="group bg-white border border-outline-variant rounded-xl p-lg hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+                            Urgent
+                        </span>
+<span class="font-headline-sm text-headline-sm text-primary">$150 - $300</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Emergency Plumbing Leak</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Downtown Metro (1.8 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Plumbing</span>
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Repair</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Posted 2h ago</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform">
+                        Claim Lead
+                    </button>
+</div>
+</div>
+<!-- Lead Card 3: Featured -->
+<div class="group bg-primary text-on-primary border border-primary-fixed rounded-xl p-lg hover:shadow-xl transition-all duration-300 flex flex-col justify-between relative">
+<div class="absolute inset-0 opacity-10 pointer-events-none overflow-hidden rounded-xl">
+<div class="absolute -top-12 -left-12 w-32 h-32 bg-white rounded-full blur-2xl"></div>
+<div class="absolute -bottom-12 -right-12 w-32 h-32 bg-white rounded-full blur-2xl"></div>
+</div>
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-white/20 text-white font-label-sm text-label-sm uppercase tracking-wider backdrop-blur-sm">
+                            High Budget
+                        </span>
+<span class="font-headline-sm text-headline-sm text-white">$2,500+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-white mb-xs">Exterior Landscaping Project</h3>
+<p class="font-body-sm text-body-sm text-white/80 flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Beverly Hills, CA (8.5 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-white/10 px-sm py-1 rounded-md text-white font-label-md text-label-md">Outdoor</span>
+<span class="bg-white/10 px-sm py-1 rounded-md text-white font-label-md text-label-md">Design</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-white/20">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-white/80">workspace_premium</span>
+<span class="font-label-md text-label-md text-white/80">Featured Client</span>
+</div>
+<button class="bg-white text-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform hover:bg-surface-bright">
+                        Bid Now
+                    </button>
+</div>
+</div>
+<!-- Lead Card 4 -->
+<div class="group bg-white border border-outline-variant rounded-xl p-lg hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+                            New
+                        </span>
+<span class="font-headline-sm text-headline-sm text-primary">$400 - $650</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Hardwood Floor Refinishing</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Pasadena, CA (12.0 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Flooring</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline">history</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Posted 5h ago</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform">
+                        Interested
+                    </button>
+</div>
+</div>
+<!-- Lead Card 5 -->
+<div class="group bg-white border border-outline-variant rounded-xl p-lg hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-surface-container text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+                            Routine
+                        </span>
+<span class="font-headline-sm text-headline-sm text-primary">$100 - $180</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">HVAC Maintenance Checkup</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Glendale, CA (6.1 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">HVAC</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Repeat Client</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform">
+                        Quote
+                    </button>
+</div>
+</div>
+<!-- Lead Card 6: Large Content -->
+<div class="group bg-white border border-outline-variant rounded-xl p-lg hover:shadow-md transition-all duration-300 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-md">
+<span class="inline-flex items-center px-sm py-xs rounded-lg bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider">
+                            New Lead
+                        </span>
+<span class="font-headline-sm text-headline-sm text-primary">$5,000+</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Kitchen Remodel &amp; Cabinetry</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-xs mb-lg">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+                        Santa Monica, CA (15.5 miles away)
+                    </p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Carpentry</span>
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Remodel</span>
+<span class="bg-surface-container px-sm py-1 rounded-md text-on-surface-variant font-label-md text-label-md">Kitchen</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-auto pt-md border-t border-outline-variant/30">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline">schedule</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Start within 2 weeks</span>
+</div>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-lg text-label-lg active:scale-95 transition-transform">
+                        Full Proposal
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only View) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-sm py-xs pb-safe bg-surface dark:bg-surface-container-lowest shadow-[0px_-4px_12px_rgba(0,0,0,0.05)] z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-5 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-md text-label-md">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:text-primary dark:hover:text-primary-fixed active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline p-2 hover:text-primary dark:hover:text-primary-fixed active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (Mobile) -->
+<button class="md:hidden fixed right-md bottom-24 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+<script>
+        // Simple Micro-interaction for lead cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search Input focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.01]');
+        });
+    </script>
+</body></html>
