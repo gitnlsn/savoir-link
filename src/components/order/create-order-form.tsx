@@ -7,6 +7,7 @@ import { Card } from "~/components/ui/card";
 import { CurrencyInput } from "~/components/ui/currency-input";
 import { Input, Label, Textarea } from "~/components/ui/input";
 import { MultiSelect } from "~/components/ui/multi-select";
+import { maskContactInfo } from "~/lib/contact-mask";
 import { formatCents } from "~/lib/currency";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
@@ -35,7 +36,9 @@ export function CreateOrderForm({
   const [locationId, setLocationId] = useState("");
   const [durationTierId, setDurationTierId] = useState(tiers[1]?.id ?? tiers[0]?.id ?? "");
   const [title, setTitle] = useState("");
+  const [titleMasked, setTitleMasked] = useState(false);
   const [description, setDescription] = useState("");
+  const [descriptionMasked, setDescriptionMasked] = useState(false);
   const [budget, setBudget] = useState(0);
   const [contactName, setContactName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
@@ -47,6 +50,31 @@ export function CreateOrderForm({
       window.location.href = res.checkoutUrl;
     },
   });
+
+  // tRPC serializes input-validation failures as a raw ZodError JSON in
+  // `error.message`. Prefer the flattened field/form messages the server exposes
+  // via `error.data.zodError` so the user sees a readable sentence.
+  const errorMessage = (() => {
+    const err = create.error;
+    if (!err) return null;
+    const zod = err.data?.zodError;
+    if (zod) {
+      const first =
+        Object.values(zod.fieldErrors).flat()[0] ?? zod.formErrors[0];
+      if (first) return first;
+    }
+    return err.message;
+  })();
+
+  const maskField = (
+    value: string,
+    setValue: (v: string) => void,
+    setMasked: (v: boolean) => void,
+  ) => {
+    const { text, masked } = maskContactInfo(value);
+    if (masked) setValue(text);
+    setMasked(masked);
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,10 +120,20 @@ export function CreateOrderForm({
           <Input
             id="title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+              setTitleMasked(false);
+            }}
+            onBlur={() => maskField(title, setTitle, setTitleMasked)}
             placeholder="Ex.: Instalação de chuveiro elétrico"
             required
           />
+          {titleMasked && (
+            <p className="mt-1 text-body-sm text-on-surface-variant">
+              Removemos um contato do texto — ele fica visível só após o
+              desbloqueio.
+            </p>
+          )}
         </div>
         <div>
           <Label htmlFor="description">Descrição</Label>
@@ -103,10 +141,22 @@ export function CreateOrderForm({
             id="description"
             rows={5}
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setDescriptionMasked(false);
+            }}
+            onBlur={() =>
+              maskField(description, setDescription, setDescriptionMasked)
+            }
             placeholder="Descreva o que precisa com o máximo de detalhes possível."
             required
           />
+          {descriptionMasked && (
+            <p className="mt-1 text-body-sm text-on-surface-variant">
+              Removemos um contato do texto — ele fica visível só após o
+              desbloqueio.
+            </p>
+          )}
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
@@ -215,11 +265,9 @@ export function CreateOrderForm({
         </div>
       </section>
 
-      {create.error && (
+      {errorMessage && (
         <Card className="border-error bg-error-container/30">
-          <p className="text-body-sm text-on-error-container">
-            {create.error.message}
-          </p>
+          <p className="text-body-sm text-on-error-container">{errorMessage}</p>
         </Card>
       )}
 

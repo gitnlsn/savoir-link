@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { maskContactInfo } from "~/lib/contact-mask";
 import { logger } from "~/lib/logger";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { getPagarmeClient } from "~/server/integrations/pagarme/pagarme.client";
@@ -8,8 +9,16 @@ import { GetPublicOrderUseCase } from "~/server/use-cases/order/get-public-order
 import { ManageOrderUseCase } from "~/server/use-cases/order/manage-order.use-case";
 
 const createOrderInput = z.object({
-  title: z.string().min(5, "Título muito curto.").max(120),
-  description: z.string().min(20, "Descreva melhor o que precisa.").max(2000),
+  title: z
+    .string()
+    .min(5, "Título muito curto.")
+    .max(120)
+    .transform((v) => maskContactInfo(v).text),
+  description: z
+    .string()
+    .min(20, "Descreva melhor o que precisa.")
+    .max(2000)
+    .transform((v) => maskContactInfo(v).text),
   budget: z.number().positive("Informe um orçamento válido."),
   categoryIds: z
     .array(z.string().min(1))
