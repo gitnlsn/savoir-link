@@ -54,6 +54,10 @@ export class HandlePagarmeWebhookUseCase {
       where: { pagarmeEventId: payload.id },
     });
     if (existing?.processedAt) {
+      logger.info("[webhook] duplicate — already processed", {
+        eventId: payload.id,
+        type: payload.type,
+      });
       return { status: "duplicate" };
     }
 
@@ -96,11 +100,17 @@ export class HandlePagarmeWebhookUseCase {
 
     const isPaid = PAID_EVENTS.has(type);
     if (!isPaid && !FAILED_EVENTS.has(type) && !CANCELLED_EVENTS.has(type)) {
+      logger.info("[webhook] ignored — unhandled event type", { type });
       return { status: "ignored" };
     }
 
     const pagarmeOrderId = extractOrderId(payload);
     const paymentCode = extractCode(payload);
+    logger.info("[webhook] matching payment", {
+      type,
+      pagarmeOrderId,
+      paymentCode,
+    });
 
     const payment = await db.payment.findFirst({
       where: {
@@ -120,13 +130,19 @@ export class HandlePagarmeWebhookUseCase {
           `Webhook ${type}: no matching payment yet (order=${pagarmeOrderId}, code=${paymentCode}) — retry`,
         );
       }
-      logger.warn("Webhook: no matching payment (non-paid event, ignoring)", {
+      logger.warn("[webhook] no matching payment (non-paid event, ignoring)", {
         type,
         pagarmeOrderId,
         paymentCode,
       });
       return { status: "ignored" };
     }
+
+    logger.info("[webhook] payment matched", {
+      paymentId: payment.id,
+      paymentType: payment.type,
+      paymentStatus: payment.status,
+    });
 
     // Backfill the pagarme order id if we matched by code.
     if (pagarmeOrderId && payment.pagarmeOrderId !== pagarmeOrderId) {
@@ -156,7 +172,12 @@ export class HandlePagarmeWebhookUseCase {
     if (!orderIdToVerify) {
       throw new Error(`Webhook ${type}: no Pagar.me order id to verify payment ${payment.id}`);
     }
+    logger.info("[webhook] verifying with Pagar.me", { orderIdToVerify });
     const remote = await pagarme.getOrder(orderIdToVerify);
+    logger.info("[webhook] Pagar.me order status", {
+      orderIdToVerify,
+      remoteStatus: remote.status,
+    });
     if (remote.status !== "paid") {
       // Either a race (not settled yet) or a forged/replayed event — do not fulfill; retry.
       throw new Error(
@@ -165,11 +186,16 @@ export class HandlePagarmeWebhookUseCase {
     }
 
     // Verified paid — dispatch fulfillment by payment type.
+    logger.info("[webhook] fulfilling", {
+      paymentId: payment.id,
+      paymentType: payment.type,
+    });
     if (payment.type === PaymentType.ORDER_PUBLICATION) {
       await new ActivateOrderOnPaymentUseCase({ db, logger }).execute(payment.id);
     } else if (payment.type === PaymentType.CREDIT_TOPUP) {
       await new CreditWalletOnPaymentUseCase({ db, logger }).execute(payment.id);
     }
+    logger.info("[webhook] fulfilled", { paymentId: payment.id });
     return { status: "processed" };
   }
 }
