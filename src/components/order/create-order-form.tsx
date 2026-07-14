@@ -6,6 +6,7 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { CurrencyInput } from "~/components/ui/currency-input";
 import { Input, Label, Textarea } from "~/components/ui/input";
+import { MultiSelect } from "~/components/ui/multi-select";
 import { formatCents } from "~/lib/currency";
 import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
@@ -30,7 +31,7 @@ export function CreateOrderForm({
   locations: Option[];
   tiers: Tier[];
 }) {
-  const [categoryId, setCategoryId] = useState("");
+  const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [locationId, setLocationId] = useState("");
   const [durationTierId, setDurationTierId] = useState(tiers[1]?.id ?? tiers[0]?.id ?? "");
   const [title, setTitle] = useState("");
@@ -53,7 +54,7 @@ export function CreateOrderForm({
       title,
       description,
       budget,
-      categoryId,
+      categoryIds,
       locationId,
       contactName,
       contactPhone,
@@ -67,26 +68,20 @@ export function CreateOrderForm({
     <form onSubmit={submit} className="space-y-8">
       {/* Category */}
       <section>
-        <h2 className="mb-3 text-headline-sm text-on-surface">
+        <h2 className="mb-1 text-headline-sm text-on-surface">
           Qual serviço você precisa?
         </h2>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setCategoryId(c.id)}
-              className={cn(
-                "rounded-full border px-4 py-2 text-label-lg transition-colors",
-                categoryId === c.id
-                  ? "border-primary bg-primary text-on-primary"
-                  : "border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container-low",
-              )}
-            >
-              {c.name}
-            </button>
-          ))}
-        </div>
+        <p className="mb-3 text-body-sm text-on-surface-variant">
+          Busque e selecione uma ou mais categorias (até 5).
+        </p>
+        <MultiSelect
+          options={categories.map((c) => ({ value: c.id, label: c.name }))}
+          selected={categoryIds}
+          onChange={setCategoryIds}
+          max={5}
+          placeholder="Buscar categoria…"
+          emptyLabel="Nenhuma categoria encontrada."
+        />
       </section>
 
       {/* Details */}
@@ -232,7 +227,7 @@ export function CreateOrderForm({
         type="submit"
         size="lg"
         className="w-full"
-        disabled={create.isPending || !categoryId || budget <= 0}
+        disabled={create.isPending || categoryIds.length === 0 || budget <= 0}
       >
         {create.isPending ? "Processando..." : "Publicar e pagar"}
       </Button>

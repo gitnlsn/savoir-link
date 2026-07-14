@@ -22,7 +22,7 @@ export class GetLeadDetailUseCase {
     const order = await this.deps.db.order.findUnique({
       where: { publicId: orderPublicId },
       include: {
-        category: true,
+        categories: true,
         location: true,
         unlocks: { where: { providerId }, take: 1 },
       },

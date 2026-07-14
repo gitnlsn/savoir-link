@@ -81,7 +81,7 @@ model Category {
     parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
     children Category[] @relation("CategoryHierarchy")
 
-    orders Order[]
+    orders Order[] @relation("OrderCategories")
 
     @@index([parentId])
 }
@@ -124,8 +124,7 @@ model Order {
     description String
     budget      Decimal @db.Decimal(10, 2)
 
-    categoryId String
-    category   Category @relation(fields: [categoryId], references: [id])
+    categories Category[] @relation("OrderCategories")
     locationId String
     location   Location @relation(fields: [locationId], references: [id])
 
@@ -148,7 +147,6 @@ model Order {
     unlocks  ContactUnlock[]
 
     @@index([status, expiresAt])
-    @@index([categoryId, status])
     @@index([locationId, status])
 }
 

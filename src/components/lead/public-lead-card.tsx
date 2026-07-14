@@ -9,7 +9,7 @@ export interface PublicLead {
   title: string;
   description: string;
   budget: number;
-  category: { name: string };
+  categories: { name: string; slug: string }[];
   location: { city: string; state: string };
   unlockCount: number;
 }
@@ -36,8 +36,10 @@ export function PublicLeadCard({ lead }: { lead: PublicLead }) {
         <p className="mt-3 line-clamp-2 text-body-sm text-on-surface-variant">
           {lead.description}
         </p>
-        <div className="mt-3">
-          <Chip>{lead.category.name}</Chip>
+        <div className="mt-3 flex flex-wrap gap-1">
+          {lead.categories.map((c) => (
+            <Chip key={c.slug}>{c.name}</Chip>
+          ))}
         </div>
       </div>
       <div className="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-4">

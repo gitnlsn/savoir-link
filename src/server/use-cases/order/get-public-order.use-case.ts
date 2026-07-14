@@ -8,7 +8,7 @@ export interface PublicOrderView {
   title: string;
   description: string;
   budget: number;
-  category: { name: string; slug: string };
+  categories: { name: string; slug: string }[];
   location: { city: string; state: string; slug: string };
   durationDays: number;
   publishedAt: Date | null;
@@ -27,7 +27,7 @@ export class GetPublicOrderUseCase {
   async byPublicId(publicId: string): Promise<PublicOrderView | null> {
     const order = await this.deps.db.order.findUnique({
       where: { publicId },
-      include: { category: true, location: true },
+      include: { categories: true, location: true },
     });
     if (!order) return null;
     return toView(order);
@@ -41,7 +41,7 @@ export function toView(order: {
   title: string;
   description: string;
   budget: unknown;
-  category: { name: string; slug: string };
+  categories: { name: string; slug: string }[];
   location: { city: string; state: string; slug: string };
   durationDays: number;
   publishedAt: Date | null;
@@ -56,7 +56,7 @@ export function toView(order: {
     title: order.title,
     description: order.description,
     budget: toNumber(order.budget as never),
-    category: { name: order.category.name, slug: order.category.slug },
+    categories: order.categories.map((c) => ({ name: c.name, slug: c.slug })),
     location: {
       city: order.location.city,
       state: order.location.state,

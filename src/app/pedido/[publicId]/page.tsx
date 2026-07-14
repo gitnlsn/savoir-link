@@ -64,15 +64,14 @@ export default async function PublicOrderPage({
           description: order.description,
           budget: order.budget,
           publicId: order.publicId,
-          category: order.category.name,
+          category: order.categories.map((c) => c.name).join(", "),
           city: order.location.city,
           state: order.location.state,
         })}
       />
       <JsonLd
         data={breadcrumbSchema([
-          { name: "Categorias", path: "/categorias" },
-          { name: order.category.name, path: `/categoria/${order.category.slug}` },
+          { name: "Pedidos", path: "/recentes" },
           { name: order.title, path: `/pedido/${order.publicId}` },
         ])}
       />
@@ -91,7 +90,9 @@ export default async function PublicOrderPage({
             </span>
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
-            <Chip>{order.category.name}</Chip>
+            {order.categories.map((c) => (
+              <Chip key={c.slug}>{c.name}</Chip>
+            ))}
             {!isActive && <Badge variant="error">Encerrado</Badge>}
           </div>
           <h2 className="mt-6 text-headline-sm text-on-surface">Descrição</h2>

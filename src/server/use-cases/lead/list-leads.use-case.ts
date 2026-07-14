@@ -4,7 +4,7 @@ import { OrderStatus, type PrismaClient } from "~/server/db-types";
 export interface ListLeadsInput {
   /** When omitted (public browse), `alreadyUnlocked` is always false. */
   providerId?: string;
-  categorySlug?: string;
+  categorySlugs?: string[];
   locationSlug?: string;
   search?: string;
   page?: number;
@@ -16,7 +16,7 @@ export interface LeadCard {
   title: string;
   description: string;
   budget: number;
-  category: { name: string; slug: string };
+  categories: { name: string; slug: string }[];
   location: { city: string; state: string };
   createdAt: Date;
   expiresAt: Date | null;
@@ -39,7 +39,9 @@ export class ListLeadsUseCase {
     const where = {
       status: OrderStatus.ACTIVE,
       expiresAt: { gt: new Date() },
-      ...(input.categorySlug ? { category: { slug: input.categorySlug } } : {}),
+      ...(input.categorySlugs?.length
+        ? { categories: { some: { slug: { in: input.categorySlugs } } } }
+        : {}),
       ...(input.locationSlug ? { location: { slug: input.locationSlug } } : {}),
       ...(input.search
         ? {
@@ -65,7 +67,7 @@ export class ListLeadsUseCase {
           createdAt: true,
           expiresAt: true,
           unlockCount: true,
-          category: { select: { name: true, slug: true } },
+          categories: { select: { name: true, slug: true } },
           location: { select: { city: true, state: true } },
           unlocks: input.providerId
             ? {
@@ -86,7 +88,7 @@ export class ListLeadsUseCase {
         title: o.title,
         description: o.description,
         budget: toNumber(o.budget),
-        category: o.category,
+        categories: o.categories,
         location: o.location,
         createdAt: o.createdAt,
         expiresAt: o.expiresAt,

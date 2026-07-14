@@ -60,7 +60,8 @@ export function ManageOrderClient({ token, tiers }: { token: string; tiers: Tier
           <div>
             <h1 className="text-headline-sm text-on-surface">{order.title}</h1>
             <p className="mt-1 text-body-sm text-on-surface-variant">
-              {order.category.name} · {order.location.city}/{order.location.state} ·{" "}
+              {order.categories.map((c) => c.name).join(", ")} ·{" "}
+              {order.location.city}/{order.location.state} ·{" "}
               {formatCents(order.budget * 100)}
             </p>
           </div>

@@ -42,7 +42,9 @@ export function MyUnlocksClient() {
             {u.location.city}/{u.location.state}
           </p>
           <div className="mt-2">
-            <Chip>{u.category.name}</Chip>
+            {u.categories.map((c, i) => (
+              <Chip key={i}>{c.name}</Chip>
+            ))}
           </div>
           <div className="mt-4 space-y-2 border-t border-outline-variant/30 pt-4 text-body-md">
             <p className="font-semibold text-on-surface">{u.contact.name}</p>

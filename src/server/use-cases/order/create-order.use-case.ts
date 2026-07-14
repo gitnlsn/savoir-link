@@ -11,7 +11,7 @@ export interface CreateOrderInput {
   title: string;
   description: string;
   budget: number;
-  categoryId: string;
+  categoryIds: string[];
   locationId: string;
   contactName: string;
   contactPhone: string;
@@ -49,11 +49,13 @@ export class CreateOrderUseCase {
     }
 
     // Validate FK references exist (fail fast with a clear message).
-    const [category, location] = await Promise.all([
-      db.category.findUnique({ where: { id: input.categoryId } }),
+    const [categoryCount, location] = await Promise.all([
+      db.category.count({ where: { id: { in: input.categoryIds } } }),
       db.location.findUnique({ where: { id: input.locationId } }),
     ]);
-    if (!category) throw new Error("Categoria inválida.");
+    if (categoryCount !== input.categoryIds.length) {
+      throw new Error("Categoria inválida.");
+    }
     if (!location) throw new Error("Localização inválida.");
 
     const publicId = `${slugify(input.title)}-${nanoid(8)}`;
@@ -69,7 +71,7 @@ export class CreateOrderUseCase {
           title: input.title,
           description: input.description,
           budget: input.budget,
-          categoryId: input.categoryId,
+          categories: { connect: input.categoryIds.map((id) => ({ id })) },
           locationId: input.locationId,
           contactName: input.contactName,
           contactPhone: input.contactPhone,

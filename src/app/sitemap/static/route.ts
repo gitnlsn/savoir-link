@@ -11,7 +11,7 @@ export async function GET() {
     { url: `${SITE_URL}/publicar`, priority: 0.9, changefreq: "weekly", images: [] },
     { url: `${SITE_URL}/como-funciona`, priority: 0.8, changefreq: "monthly", images: [] },
     { url: `${SITE_URL}/precos`, priority: 0.8, changefreq: "monthly", images: [] },
-    { url: `${SITE_URL}/categorias`, priority: 0.8, changefreq: "weekly", images: [] },
+    { url: `${SITE_URL}/recentes`, priority: 0.8, changefreq: "daily", images: [] },
     { url: `${SITE_URL}/termos`, priority: 0.2, changefreq: "monthly", images: [] },
     { url: `${SITE_URL}/privacidade`, priority: 0.2, changefreq: "monthly", images: [] },
   ];

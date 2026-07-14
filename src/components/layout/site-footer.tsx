@@ -17,7 +17,7 @@ export function SiteFooter() {
           links={[
             ["Publicar pedido", "/publicar"],
             ["Como funciona", "/como-funciona"],
-            ["Categorias", "/categorias"],
+            ["Pedidos recentes", "/recentes"],
           ]}
         />
         <FooterCol

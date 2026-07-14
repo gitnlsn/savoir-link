@@ -22,7 +22,7 @@ export class ManageOrderUseCase {
   async get(manageToken: string) {
     const order = await this.deps.db.order.findUnique({
       where: { manageToken },
-      include: { category: true, location: true },
+      include: { categories: true, location: true },
     });
     if (!order) return null;
     return {
@@ -32,7 +32,7 @@ export class ManageOrderUseCase {
       title: order.title,
       description: order.description,
       budget: toNumber(order.budget),
-      category: { name: order.category.name, slug: order.category.slug },
+      categories: order.categories.map((c) => ({ name: c.name, slug: c.slug })),
       location: { city: order.location.city, state: order.location.state },
       contactName: order.contactName,
       contactPhone: order.contactPhone,

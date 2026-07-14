@@ -4,7 +4,7 @@ import type { PrismaClient } from "~/server/db-types";
 export interface UnlockedLead {
   orderPublicId: string;
   title: string;
-  category: { name: string };
+  categories: { name: string }[];
   location: { city: string; state: string };
   budget: number;
   unlockedAt: Date;
@@ -28,14 +28,14 @@ export class ListMyUnlocksUseCase {
       where: { providerId },
       orderBy: { createdAt: "desc" },
       include: {
-        order: { include: { category: true, location: true } },
+        order: { include: { categories: true, location: true } },
       },
     });
 
     return unlocks.map((u) => ({
       orderPublicId: u.order.publicId,
       title: u.order.title,
-      category: { name: u.order.category.name },
+      categories: u.order.categories.map((c) => ({ name: c.name })),
       location: { city: u.order.location.city, state: u.order.location.state },
       budget: toNumber(u.order.budget),
       unlockedAt: u.createdAt,

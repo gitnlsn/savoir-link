@@ -12,10 +12,10 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           <Link
-            href="/categorias"
+            href="/recentes"
             className="text-label-lg text-on-surface-variant transition-colors hover:text-primary"
           >
-            Categorias
+            Pedidos
           </Link>
           <Link
             href="/como-funciona"

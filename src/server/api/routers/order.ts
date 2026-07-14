@@ -11,7 +11,10 @@ const createOrderInput = z.object({
   title: z.string().min(5, "Título muito curto.").max(120),
   description: z.string().min(20, "Descreva melhor o que precisa.").max(2000),
   budget: z.number().positive("Informe um orçamento válido."),
-  categoryId: z.string().min(1),
+  categoryIds: z
+    .array(z.string().min(1))
+    .min(1, "Escolha ao menos uma categoria.")
+    .max(5, "Escolha no máximo 5 categorias."),
   locationId: z.string().min(1),
   contactName: z.string().min(2).max(120),
   contactPhone: z.string().min(8).max(20),

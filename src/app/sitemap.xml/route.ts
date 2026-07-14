@@ -13,7 +13,6 @@ export async function GET() {
   // List of all sub-sitemaps
   const sitemaps = [
     { loc: `${SITE_URL}/sitemap/static`, lastmod: now },
-    { loc: `${SITE_URL}/sitemap/categories`, lastmod: now },
     { loc: `${SITE_URL}/sitemap/orders`, lastmod: now },
     { loc: `${SITE_URL}/sitemap/blog`, lastmod: now },
   ];

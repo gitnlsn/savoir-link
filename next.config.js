@@ -13,6 +13,12 @@ const config = {
       { protocol: "https", hostname: "www.gstatic.com" },
     ],
   },
+  async redirects() {
+    return [
+      // The old categories listing is now the recent-orders feed.
+      { source: "/categorias", destination: "/recentes", permanent: true },
+    ];
+  },
 };
 
 export default config;

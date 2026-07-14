@@ -6,18 +6,18 @@ import { useState } from "react";
 
 import { Badge, Chip } from "~/components/ui/badge";
 import { Input } from "~/components/ui/input";
+import { MultiSelect } from "~/components/ui/multi-select";
 import { formatCurrency } from "~/lib/currency";
-import { cn } from "~/lib/utils";
 import { api } from "~/trpc/react";
 
 export function LeadsBrowseClient() {
   const [search, setSearch] = useState("");
-  const [categorySlug, setCategorySlug] = useState<string | undefined>();
+  const [categorySlugs, setCategorySlugs] = useState<string[]>([]);
 
   const { data: categories } = api.catalog.categories.useQuery();
   const { data, isLoading } = api.lead.list.useQuery({
     search: search || undefined,
-    categorySlug,
+    categorySlugs: categorySlugs.length ? categorySlugs : undefined,
   });
 
   return (
@@ -43,19 +43,17 @@ export function LeadsBrowseClient() {
           />
         </div>
       </div>
-      <div className="mb-6 flex flex-wrap gap-2">
-        <FilterChip active={!categorySlug} onClick={() => setCategorySlug(undefined)}>
-          Todas
-        </FilterChip>
-        {categories?.map((c) => (
-          <FilterChip
-            key={c.id}
-            active={categorySlug === c.slug}
-            onClick={() => setCategorySlug(c.slug)}
-          >
-            {c.name}
-          </FilterChip>
-        ))}
+      <div className="mb-6">
+        <MultiSelect
+          options={(categories ?? []).map((c) => ({
+            value: c.slug,
+            label: c.name,
+          }))}
+          selected={categorySlugs}
+          onChange={setCategorySlugs}
+          placeholder="Filtrar por categorias…"
+          emptyLabel="Nenhuma categoria encontrada."
+        />
       </div>
 
       {/* Grid */}
@@ -94,8 +92,10 @@ export function LeadsBrowseClient() {
                 <p className="mt-3 line-clamp-2 text-body-sm text-on-surface-variant">
                   {lead.description}
                 </p>
-                <div className="mt-3">
-                  <Chip>{lead.category.name}</Chip>
+                <div className="mt-3 flex flex-wrap gap-1">
+                  {lead.categories.map((c) => (
+                    <Chip key={c.slug}>{c.name}</Chip>
+                  ))}
                 </div>
               </div>
               <div className="mt-4 flex items-center justify-between border-t border-outline-variant/30 pt-4">
@@ -111,30 +111,5 @@ export function LeadsBrowseClient() {
         </div>
       )}
     </div>
-  );
-}
-
-function FilterChip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "rounded-full border px-4 py-2 text-label-md transition-colors",
-        active
-          ? "border-primary bg-primary text-on-primary"
-          : "border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low",
-      )}
-    >
-      {children}
-    </button>
   );
 }

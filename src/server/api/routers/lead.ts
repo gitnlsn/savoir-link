@@ -15,7 +15,7 @@ export const leadRouter = createTRPCRouter({
   list: protectedProcedure
     .input(
       z.object({
-        categorySlug: z.string().optional(),
+        categorySlugs: z.array(z.string()).optional(),
         locationSlug: z.string().optional(),
         search: z.string().optional(),
         page: z.number().int().min(1).optional(),

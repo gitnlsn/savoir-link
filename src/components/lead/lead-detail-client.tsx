@@ -57,7 +57,9 @@ export function LeadDetailClient({ publicId }: { publicId: string }) {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <Chip>{order.category.name}</Chip>
+          {order.categories.map((c) => (
+            <Chip key={c.slug}>{c.name}</Chip>
+          ))}
           <Chip>{order.unlockCount} desbloqueio(s)</Chip>
         </div>
 
