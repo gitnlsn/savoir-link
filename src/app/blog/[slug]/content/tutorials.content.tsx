@@ -2619,7 +2619,7 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 										"Foto profissional de alta qualidade",
 										"Descrição clara e objetiva dos seus serviços",
 										"Portfólio com seus melhores trabalhos",
-										"Depoimentos e avaliações positivas em destaque",
+										"Diferenciais claros e resultados que você já entregou",
 										"Informações de contato e disponibilidade atualizadas",
 									]}
 								/>
@@ -2643,7 +2643,7 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 									"Considere sua experiência e especialização ao precificar",
 									"Ofereça pacotes ou descontos para primeiros clientes",
 									"Seja transparente sobre o que está incluído no preço",
-									"Reajuste seus valores conforme ganha experiência e avaliações",
+									"Reajuste seus valores conforme ganha experiência e reputação",
 								]}
 							/>
 						</div>
@@ -2661,7 +2661,7 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 								variant="check"
 								items={[
 									"Responda mensagens em até 2 horas sempre que possível",
-									"Configure notificações push para não perder nenhuma mensagem",
+									"Ative os alertas de e-mail para não perder nenhum lead",
 									"Seja cortês e profissional em todas as interações",
 									"Faça perguntas relevantes para entender bem a necessidade",
 									"Mantenha o cliente informado sobre o andamento do trabalho",
@@ -2676,8 +2676,8 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 							<ContentCard variant="accent" accentPosition="corners">
 								<BodyText className="mb-3">
 									Clientes satisfeitos são sua melhor propaganda. Quando você
-									supera as expectativas, gera avaliações positivas,
-									recomendações e clientes recorrentes.
+									supera as expectativas, gera indicações e clientes
+									recorrentes.
 								</BodyText>
 								<BulletList
 									variant="check"
@@ -2694,21 +2694,21 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 
 						<div>
 							<Label className="mb-3 block text-primary">
-								5. Acumule Avaliações Positivas
+								5. Construa Reputação e Peça Indicações
 							</Label>
 							<BodyText className="mb-3">
-								Avaliações são o ativo mais valioso de um profissional na
-								plataforma. Elas constroem credibilidade e atraem novos clientes
+								A reputação é o ativo mais valioso de um profissional no
+								mercado. Ela se constrói pelo boca a boca e por bons trabalhos,
 								organicamente.
 							</BodyText>
 							<BulletList
 								variant="arrow"
 								items={[
-									"Peça educadamente para clientes satisfeitos deixarem avaliação",
-									"Mencione ao final do trabalho: 'Ficou satisfeito? Uma avaliação ajudaria muito!'",
-									"Responda a todas as avaliações, positivas ou negativas",
-									"Use feedback negativo como oportunidade de melhoria",
-									"Mantenha uma média alta para aparecer bem posicionado nas buscas",
+									"Peça indicações a clientes satisfeitos",
+									"Reúna depoimentos e autorização para usar fotos dos trabalhos",
+									"Monte um portfólio para mostrar a novos clientes",
+									"Use feedback do cliente como oportunidade de melhoria",
+									"Mantenha seu cadastro e registros profissionais em dia",
 								]}
 							/>
 						</div>
@@ -2736,41 +2736,41 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 
 						<div>
 							<Label className="mb-3 block text-primary">
-								7. Mantenha-se Ativo e Disponível
+								7. Seja Rápido nos Leads
 							</Label>
 							<BodyText className="mb-3">
-								A plataforma favorece profissionais ativos. Quanto mais você
-								está presente e disponível, mais visibilidade você ganha.
+								Quem responde primeiro costuma fechar. Quanto mais rápido você
+								desbloqueia e responde aos leads, maiores as suas chances.
 							</BodyText>
 							<BulletList
 								variant="check"
 								items={[
-									"Faça login regularmente na plataforma",
-									"Mantenha seu status de disponibilidade atualizado",
+									"Acesse a lista de leads com frequência",
+									"Mantenha créditos na carteira para não perder oportunidades",
 									"Atualize seu portfólio com trabalhos recentes",
-									"Participe ativamente das mensagens e interações",
-									"Configure horários de atendimento claros para os clientes",
+									"Desbloqueie e entre em contato o quanto antes",
+									"Combine horários de atendimento claros com o cliente",
 								]}
 							/>
 						</div>
 
 						<div>
 							<Label className="mb-3 block text-primary">
-								8. Use as Ferramentas da Plataforma
+								8. Use os Recursos da Savoir Link
 							</Label>
 							<ContentCard variant="bordered">
 								<BodyText className="mb-3">
-									A Savoir Link oferece várias ferramentas para ajudar
-									profissionais a crescerem:
+									A Savoir Link oferece vários recursos para ajudar
+									profissionais a encontrar clientes:
 								</BodyText>
 								<BulletList
 									variant="arrow"
 									items={[
-										"Dashboard com análises de desempenho e métricas",
-										"Sistema de mensagens em tempo real para comunicação rápida",
-										"Integração com Google Calendar para gestão de agenda",
-										"Notificações personalizáveis para não perder oportunidades",
-										"Sistema de pagamento seguro que protege você e o cliente",
+										"Lista de leads com clientes buscando o seu serviço",
+										"Busca e filtros por categoria para achar os leads certos",
+										"Carteira de créditos para desbloquear contatos quando quiser",
+										"Contato direto do cliente: telefone, WhatsApp e e-mail",
+										"Meus contatos: histórico dos leads que você desbloqueou",
 									]}
 								/>
 							</ContentCard>
@@ -2792,7 +2792,7 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 								</BodyText>
 								<BodyText className="text-on-surface">
 									Complete 100% do seu perfil, adicione portfólio, configure
-									preços competitivos e ative todas as notificações.
+									preços competitivos e adicione créditos à carteira.
 								</BodyText>
 							</div>
 							<div>
@@ -2800,8 +2800,8 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 									Semana 2: Primeiros Clientes
 								</BodyText>
 								<BodyText className="text-on-surface">
-									Responda rapidamente a todas as mensagens, ofereça um pequeno
-									desconto para os primeiros 3 clientes, peça avaliações.
+									Desbloqueie e responda rapidamente aos primeiros leads,
+									ofereça um bom preço aos primeiros clientes e peça indicações.
 								</BodyText>
 							</div>
 							<div>
@@ -2818,8 +2818,8 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 									Semana 4: Expansão
 								</BodyText>
 								<BodyText className="text-on-surface">
-									Foque em superar expectativas, acumule mais avaliações,
-									identifique seu nicho de especialização e ajuste estratégia.
+									Foque em superar expectativas, peça indicações, identifique
+									seu nicho de especialização e ajuste a estratégia.
 								</BodyText>
 							</div>
 						</div>
@@ -2831,238 +2831,130 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 			{post.slug === "importancia-avaliacoes" && (
 				<>
 					<BodyText>
-						As avaliações são o coração do ecossistema da Savoir Link. Elas
-						criam confiança, reconhecem bons profissionais e ajudam clientes a
-						tomar decisões informadas. Entenda por que sua avaliação é tão
-						importante e como fazê-la de forma construtiva.
+						A reputação é o que sustenta um bom mercado de serviços. Ela cria
+						confiança, reconhece bons profissionais e ajuda clientes a decidir com
+						segurança. Como o contato na Savoir Link acontece direto entre as
+						partes, a reputação se constrói no relacionamento, nas indicações e no
+						histórico de bons trabalhos.
 					</BodyText>
 
 					<ContentCard variant="accent" accentPosition="left" className="mt-6">
 						<Headline size="sm" className="mb-4">
-							Por Que as Avaliações São Fundamentais
+							Por Que a Reputação Importa
 						</Headline>
 						<BulletList
 							variant="check"
 							items={[
-								"Constroem reputação e credibilidade dos profissionais",
-								"Ajudam novos clientes a escolher com segurança",
-								"Incentivam a excelência e a melhoria contínua",
-								"Criam um ambiente transparente e confiável",
-								"Valorizam o bom trabalho e o profissionalismo",
+								"Ajuda novos clientes a escolher com mais segurança",
+								"Reconhece o bom trabalho e o profissionalismo",
+								"Incentiva a excelência e a melhoria contínua",
+								"Gera indicações e clientes recorrentes",
+								"Fortalece a confiança em todo o mercado de serviços",
 							]}
 						/>
 					</ContentCard>
 
 					<Headline size="sm" className="mt-8 mb-4">
-						Para Clientes: O Poder da Sua Avaliação
+						Para Clientes: Como Avaliar um Profissional
 					</Headline>
+
+					<BodyText className="mb-4">
+						Depois de publicar seu pedido, vários profissionais podem entrar em
+						contato. Avalie cada um antes de fechar negócio:
+					</BodyText>
 
 					<div className="space-y-6">
 						<div>
 							<Label className="mb-3 block text-primary">
-								Sua Avaliação Ajuda Outros Clientes
+								Um Bom Checklist Antes de Contratar
 							</Label>
-							<BodyText className="mb-3">
-								Quando você compartilha sua experiência, está ajudando outras
-								pessoas a tomar decisões mais informadas. Uma avaliação
-								detalhada pode fazer toda a diferença para alguém que está em
-								dúvida.
-							</BodyText>
 							<BulletList
 								variant="arrow"
 								items={[
-									"Descreva a qualidade do trabalho recebido",
-									"Comente sobre a comunicação e profissionalismo",
-									"Mencione se o prazo foi cumprido",
-									"Compartilhe se o profissional foi além das expectativas",
-									"Seja específico: o que funcionou bem? O que poderia melhorar?",
+									"Peça referências de trabalhos anteriores",
+									"Veja o portfólio e fotos de serviços já realizados",
+									"Confira o registro profissional quando aplicável (CRP, OAB, CREA)",
+									"Compare os orçamentos que você recebeu",
+									"Avalie a clareza e a rapidez na comunicação",
+									"Combine escopo, prazo e forma de pagamento por escrito",
 								]}
 							/>
 						</div>
 
 						<div>
-							<Label className="mb-3 block text-primary">
-								Reconheça o Bom Trabalho
-							</Label>
+							<Label className="mb-3 block text-primary">Sinais de Alerta</Label>
 							<ContentCard variant="bordered">
-								<BodyText className="mb-3">
-									Profissionais dependem de avaliações para construir sua
-									reputação. Quando você reconhece um trabalho bem feito, está
-									investindo no sucesso daquele profissional e incentivando a
-									excelência.
-								</BodyText>
 								<BulletList
-									variant="check"
+									variant="dash"
 									items={[
-										"Uma avaliação 5 estrelas valoriza o esforço do profissional",
-										"Comentários positivos atraem mais clientes para ele",
-										"Seu feedback motiva a continuar entregando qualidade",
-										"Você pode estar ajudando um talento a ser descoberto",
+										"Preço muito abaixo do mercado sem explicação",
+										"Recusa em dar referências ou mostrar trabalhos anteriores",
+										"Comunicação confusa ou promessas boas demais",
+										"Pressa excessiva para fechar sem detalhar o serviço",
 									]}
 								/>
 							</ContentCard>
-						</div>
-
-						<div>
-							<Label className="mb-3 block text-primary">
-								Como Fazer uma Avaliação Construtiva
-							</Label>
-							<BodyText className="mb-3">
-								Seja honesto, justo e específico. Uma boa avaliação equilibra
-								elogios com sugestões de melhoria quando necessário.
-							</BodyText>
-							<div className="space-y-4">
-								<ContentCard variant="bordered">
-									<BodyText className="mb-2 font-semibold text-primary">
-										✓ Exemplo de Boa Avaliação:
-									</BodyText>
-									<BodyText className="text-on-surface italic">
-										"Excelente profissional! Entregou o projeto 2 dias antes do
-										prazo, com qualidade impecável. A comunicação foi rápida e
-										clara em todas as etapas. Fez ajustes sem custo adicional e
-										sempre com boa vontade. Super recomendo! Única sugestão:
-										poderia ter mais opções de cor nos mockups iniciais."
-									</BodyText>
-								</ContentCard>
-
-								<ContentCard variant="bordered">
-									<BodyText className="mb-2 font-semibold text-primary">
-										✗ Evite Avaliações Vagas:
-									</BodyText>
-									<BodyText className="text-on-surface italic line-through">
-										"Muito bom, recomendo." (Falta detalhes e contexto)
-									</BodyText>
-								</ContentCard>
-							</div>
 						</div>
 					</div>
 
 					<Headline size="sm" className="mt-8 mb-4">
-						Para Profissionais: Como Lidar com Avaliações
+						Para Profissionais: Como Construir Reputação
 					</Headline>
 
 					<div className="space-y-6">
 						<div>
 							<Label className="mb-3 block text-primary">
-								Avaliações Positivas: Agradeça e Valorize
+								Sua Reputação é Seu Maior Ativo
 							</Label>
 							<BodyText className="mb-3">
-								Sempre responda a avaliações positivas com gratidão. Isso mostra
-								profissionalismo e reforça o relacionamento com o cliente.
+								Como o negócio é fechado diretamente com o cliente, sua reputação
+								se constrói fora da plataforma: pela qualidade do trabalho, pelo
+								boca a boca e por um bom histórico.
 							</BodyText>
 							<BulletList
 								variant="check"
 								items={[
-									"Agradeça sinceramente pelo feedback",
-									"Mencione que foi um prazer trabalhar naquele projeto",
-									"Convide para futuros trabalhos",
-									"Mantenha um tom profissional e caloroso",
+									"Entregue com qualidade e dentro do prazo combinado",
+									"Peça indicações a clientes satisfeitos",
+									"Reúna depoimentos e autorização para usar fotos dos trabalhos",
+									"Monte um portfólio para apresentar a novos clientes",
+									"Responda rápido aos leads e seja claro na proposta",
+									"Mantenha cadastro e registros profissionais em dia",
 								]}
 							/>
 						</div>
 
 						<div>
 							<Label className="mb-3 block text-primary">
-								Avaliações Negativas: Oportunidade de Crescimento
+								Transforme Clientes em Divulgadores
 							</Label>
 							<ContentCard variant="accent" accentPosition="corners">
-								<BodyText className="mb-3 font-bold text-secondary">
-									Não leve para o lado pessoal!
-								</BodyText>
 								<BodyText className="mb-3">
-									Avaliações críticas, quando construtivas, são valiosas para
-									seu desenvolvimento. Responda com maturidade e mostre que você
-									se importa com a satisfação do cliente.
-								</BodyText>
-								<BulletList
-									variant="arrow"
-									items={[
-										"Agradeça pelo feedback, mesmo que negativo",
-										"Reconheça os pontos levantados sem se justificar excessivamente",
-										"Explique brevemente o contexto, se relevante",
-										"Mostre que está trabalhando para melhorar",
-										"Ofereça solução ou compensação, se apropriado",
-										"Mantenha sempre o profissionalismo na resposta",
-									]}
-								/>
-							</ContentCard>
-						</div>
-
-						<div>
-							<Label className="mb-3 block text-primary">
-								Incentive Clientes a Avaliar
-							</Label>
-							<BodyText className="mb-3">
-								Não tenha vergonha de pedir avaliações. A maioria dos clientes
-								satisfeitos fica feliz em ajudar, mas às vezes só precisam de um
-								lembrete.
-							</BodyText>
-							<BulletList
-								variant="check"
-								items={[
-									"Ao concluir o projeto: 'Ficou satisfeito com o resultado?'",
-									"Peça educadamente: 'Uma avaliação ajudaria muito no meu trabalho!'",
-									"Explique a importância: 'Avaliações me ajudam a conquistar novos clientes'",
-									"Facilite o processo: 'Leva apenas 1 minuto no seu dashboard'",
-									"Agradeça antecipadamente pela consideração",
-								]}
-							/>
-						</div>
-					</div>
-
-					<ContentCard variant="bordered" className="mt-8">
-						<Headline size="sm" className="mb-4">
-							Sistema de Avaliação da Savoir Link
-						</Headline>
-						<div className="space-y-4">
-							<div>
-								<Label className="mb-2 block text-primary">
-									Como Funciona
-								</Label>
-								<BulletList
-									variant="arrow"
-									items={[
-										"Avaliações ficam disponíveis após a conclusão do serviço",
-										"Notificação por 48h para lembrar de avaliar",
-										"Você pode avaliar a qualquer momento, mesmo após o período",
-										"É possível editar ou alterar sua avaliação posteriormente",
-										"Avaliações são públicas e visíveis no perfil do profissional",
-										"Tanto clientes quanto profissionais podem responder",
-									]}
-								/>
-							</div>
-
-							<div>
-								<Label className="mb-2 block text-primary">
-									Critérios de Avaliação
-								</Label>
-								<BodyText className="text-on-surface">
-									As avaliações consideram múltiplos aspectos:
+									Um cliente satisfeito é sua melhor propaganda. Supere as
+									expectativas e peça, com naturalidade, que ele indique seu
+									trabalho.
 								</BodyText>
 								<BulletList
 									variant="check"
 									items={[
-										"★ Qualidade do trabalho entregue",
-										"★ Cumprimento de prazos",
-										"★ Comunicação e profissionalismo",
-										"★ Disposição para ajustes e melhorias",
-										"★ Custo-benefício do serviço",
+										"Faça um follow-up após concluir o serviço",
+										"Ofereça um bom atendimento do primeiro contato ao pós-venda",
+										"Peça que compartilhem seu contato com quem precisar",
+										"Retribua indicações e mantenha o relacionamento",
 									]}
 								/>
-							</div>
+							</ContentCard>
 						</div>
-					</ContentCard>
+					</div>
 
 					<ContentCard variant="accent" accentPosition="left" className="mt-8">
 						<Headline size="sm" className="mb-4">
-							Faça Sua Parte: Construa um Ecossistema Melhor
+							Reputação Constrói Confiança
 						</Headline>
 						<BodyText>
-							Cada avaliação contribui para um marketplace mais transparente,
-							justo e confiável. Seja cliente ou profissional, seu feedback
-							honesto e construtivo fortalece toda a comunidade Savoir Link.
-							Avalie com sinceridade, responda com profissionalismo e ajude a
-							criar um ambiente onde a excelência é reconhecida e recompensada!
+							Seja cliente ou profissional, tratar cada negócio com transparência
+							e respeito fortalece toda a comunidade. Avalie com critério, entregue
+							com qualidade e construa uma reputação que abre portas.
 						</BodyText>
 					</ContentCard>
 				</>
@@ -3323,12 +3215,12 @@ export function TutorialsContent({ post }: { post: BlogPost }) {
 						<BulletList
 							variant="check"
 							items={[
-								"✓ Pagamentos instantâneos via Pix integrados na plataforma",
-								"✓ Dashboard inteligente com métricas e insights para profissionais",
-								"✓ Sistema de mensagens em tempo real para comunicação ágil",
+								"✓ Conexão direta entre clientes e profissionais, sem intermediar o serviço",
+								"✓ Modelo de leads: o cliente publica um pedido e os profissionais o procuram",
+								"✓ Contato direto por telefone, WhatsApp e e-mail para negociação ágil",
 								"✓ Flexibilidade total: serviços presenciais, online ou híbridos",
-								"✓ Avaliações transparentes que constroem reputação",
-								"✓ Integração com Google Calendar para gestão eficiente",
+								"✓ Créditos flexíveis: o profissional paga só pelos contatos que desbloqueia",
+								"✓ Busca e filtros por categoria para encontrar os clientes certos",
 								"✓ Plataforma segura com proteção para clientes e profissionais",
 								"✓ Suporte para diversos modelos de precificação e serviços",
 							]}
