@@ -34,15 +34,21 @@ Design system: "Modern Corporate" (Manrope, blue/emerald Material-3 tokens) defi
 
 ## Local development
 
-Requires Node 20+ and a PostgreSQL database.
+Requires Node 20+ and Docker (for the database).
 
 ```bash
 cp .env.example .env      # fill AUTH_GOOGLE_*, PAGARME_API_KEY (sk_test_*), etc.
 npm install
+docker compose up -d      # start PostgreSQL (db "savoir-link" on :5432)
 npm run db:push           # sync schema
 npm run db:seed           # seed categories + locations
 npm run dev
 ```
+
+The bundled `docker-compose.yml` provisions Postgres 16 with `postgres:postgres` credentials and a
+`savoir-link` database — matching the default `DATABASE_URL` in `.env.example`. Data persists in the
+`savoir-link-pgdata` volume; `docker compose down -v` wipes it. If you already run Postgres another
+way, just point `DATABASE_URL` at it and skip the compose step.
 
 Key env (see `src/env.js` for the full validated schema): `DATABASE_URL`, `AUTH_SECRET`,
 `AUTH_GOOGLE_ID/SECRET`, `PAGARME_API_KEY`, `WEBHOOK_AUTH_USERNAME/PASSWORD`, `RESEND_API_KEY`,
