@@ -29,9 +29,9 @@ export interface CreditPackage {
 
 /** Customer publication tiers (longer open window = higher fee). */
 export const DURATION_TIERS: readonly DurationTier[] = [
-  { id: "7d", days: 7, priceCents: 1990, label: "7 dias" },
-  { id: "15d", days: 15, priceCents: 2990, label: "15 dias" },
-  { id: "30d", days: 30, priceCents: 4990, label: "30 dias" },
+  { id: "7d", days: 7, priceCents: 500, label: "7 dias" },
+  { id: "15d", days: 15, priceCents: 900, label: "15 dias" },
+  { id: "30d", days: 30, priceCents: 1500, label: "30 dias" },
 ] as const;
 
 /** Flat cost, in credits, for a provider to unlock one order's contact. */
