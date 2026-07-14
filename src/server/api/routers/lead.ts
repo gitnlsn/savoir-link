@@ -17,14 +17,21 @@ export const leadRouter = createTRPCRouter({
       z.object({
         categorySlugs: z.array(z.string()).optional(),
         locationSlug: z.string().optional(),
+        // Precise radius search (takes precedence over locationSlug). lat+lng+radiusKm move together.
+        lat: z.number().optional(),
+        lng: z.number().optional(),
+        radiusKm: z.number().positive().max(500).optional(),
         search: z.string().optional(),
         page: z.number().int().min(1).optional(),
       }),
     )
     .query(async ({ ctx, input }) => {
+      const { lat, lng, radiusKm, ...rest } = input;
       return new ListLeadsUseCase({ db: ctx.db }).execute({
         providerId: ctx.session.user.id,
-        ...input,
+        ...rest,
+        center: lat != null && lng != null ? { lat, lng } : undefined,
+        radiusKm,
       });
     }),
 

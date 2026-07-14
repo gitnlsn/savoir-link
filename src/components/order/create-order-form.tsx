@@ -6,7 +6,12 @@ import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { CurrencyInput } from "~/components/ui/currency-input";
 import { Input, Label, Textarea } from "~/components/ui/input";
+import {
+  LocationAutocomplete,
+  type ResolvedPlace,
+} from "~/components/ui/location-autocomplete";
 import { MultiSelect } from "~/components/ui/multi-select";
+import { env } from "~/env";
 import { maskContactInfo } from "~/lib/contact-mask";
 import { formatCents } from "~/lib/currency";
 import { cn } from "~/lib/utils";
@@ -32,8 +37,10 @@ export function CreateOrderForm({
   locations: Option[];
   tiers: Tier[];
 }) {
+  const placesEnabled = env.NEXT_PUBLIC_ENABLE_GOOGLE_PLACES;
   const [categoryIds, setCategoryIds] = useState<string[]>([]);
   const [locationId, setLocationId] = useState("");
+  const [place, setPlace] = useState<ResolvedPlace | null>(null);
   const [durationTierId, setDurationTierId] = useState(tiers[1]?.id ?? tiers[0]?.id ?? "");
   const [title, setTitle] = useState("");
   const [titleMasked, setTitleMasked] = useState(false);
@@ -83,7 +90,9 @@ export function CreateOrderForm({
       description,
       budget,
       categoryIds,
-      locationId,
+      // Places mode sends the precise `place` (server upserts the city); fallback sends `locationId`.
+      locationId: place ? undefined : locationId,
+      place: place ?? undefined,
       contactName,
       contactPhone,
       contactWhatsapp: contactWhatsapp || undefined,
@@ -161,20 +170,36 @@ export function CreateOrderForm({
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="location">Localização</Label>
-            <select
-              id="location"
-              value={locationId}
-              onChange={(e) => setLocationId(e.target.value)}
-              required
-              className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-body-md outline-none focus:border-transparent focus:ring-2 focus:ring-primary"
-            >
-              <option value="">Selecione a cidade</option>
-              {locations.map((l) => (
-                <option key={l.id} value={l.id}>
-                  {l.name}
-                </option>
-              ))}
-            </select>
+            {placesEnabled ? (
+              <>
+                <LocationAutocomplete
+                  value={place?.formattedAddress}
+                  onSelect={setPlace}
+                  placeholder="Digite o endereço do serviço…"
+                />
+                {place && (
+                  <p className="mt-1 text-body-sm text-on-surface-variant">
+                    {place.city}
+                    {place.state ? ` — ${place.state}` : ""}
+                  </p>
+                )}
+              </>
+            ) : (
+              <select
+                id="location"
+                value={locationId}
+                onChange={(e) => setLocationId(e.target.value)}
+                required
+                className="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-4 py-3 text-body-md outline-none focus:border-transparent focus:ring-2 focus:ring-primary"
+              >
+                <option value="">Selecione a cidade</option>
+                {locations.map((l) => (
+                  <option key={l.id} value={l.id}>
+                    {l.name}
+                  </option>
+                ))}
+              </select>
+            )}
           </div>
           <div>
             <Label htmlFor="budget">Orçamento estimado</Label>
@@ -275,7 +300,12 @@ export function CreateOrderForm({
         type="submit"
         size="lg"
         className="w-full"
-        disabled={create.isPending || categoryIds.length === 0 || budget <= 0}
+        disabled={
+          create.isPending ||
+          categoryIds.length === 0 ||
+          budget <= 0 ||
+          (placesEnabled ? !place : !locationId)
+        }
       >
         {create.isPending ? "Processando..." : "Publicar e pagar"}
       </Button>

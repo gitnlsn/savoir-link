@@ -6,13 +6,28 @@ import { slugify } from "~/lib/utils";
 import { PaymentType, type PrismaClient } from "~/server/db-types";
 import { getDurationTier } from "~/server/config/pricing";
 import type { PagarmeClient } from "~/server/integrations/pagarme/pagarme.client";
+import { deriveCitySlug } from "~/server/use-cases/location/derive-city-slug";
+
+/** Precise address captured via Google Places (autocomplete mode). */
+export interface CreateOrderPlace {
+  placeId: string;
+  formattedAddress: string;
+  latitude: number;
+  longitude: number;
+  city: string;
+  state: string;
+  neighborhood?: string;
+}
 
 export interface CreateOrderInput {
   title: string;
   description: string;
   budget: number;
   categoryIds: string[];
-  locationId: string;
+  /** Coarse city FK (fallback dropdown). Provide this OR `place`. */
+  locationId?: string;
+  /** Precise address (autocomplete mode). Provide this OR `locationId`. */
+  place?: CreateOrderPlace;
   contactName: string;
   contactPhone: string;
   contactWhatsapp?: string;
@@ -48,15 +63,22 @@ export class CreateOrderUseCase {
       throw new Error(`Invalid duration tier: ${input.durationTierId}`);
     }
 
-    // Validate FK references exist (fail fast with a clear message).
-    const [categoryCount, location] = await Promise.all([
-      db.category.count({ where: { id: { in: input.categoryIds } } }),
-      db.location.findUnique({ where: { id: input.locationId } }),
-    ]);
+    // Validate categories exist (fail fast with a clear message).
+    const categoryCount = await db.category.count({
+      where: { id: { in: input.categoryIds } },
+    });
     if (categoryCount !== input.categoryIds.length) {
       throw new Error("Categoria inválida.");
     }
-    if (!location) throw new Error("Localização inválida.");
+
+    // Resolve the coarse city Location that this order attaches to. In precise (Places) mode we
+    // upsert the city from the resolved place so the required FK is always satisfied; in fallback
+    // mode we validate the chosen city id. Every order also stores lat/lng (precise point when
+    // available, else the city centroid) so it is radius-filterable.
+    const { locationId, latitude, longitude } = await this.resolveLocation(
+      db,
+      input,
+    );
 
     const publicId = `${slugify(input.title)}-${nanoid(8)}`;
     const manageToken = nanoid(32);
@@ -72,7 +94,12 @@ export class CreateOrderUseCase {
           description: input.description,
           budget: input.budget,
           categories: { connect: input.categoryIds.map((id) => ({ id })) },
-          locationId: input.locationId,
+          locationId,
+          addressLine: input.place?.formattedAddress,
+          neighborhood: input.place?.neighborhood,
+          placeId: input.place?.placeId,
+          latitude,
+          longitude,
           contactName: input.contactName,
           contactPhone: input.contactPhone,
           contactWhatsapp: input.contactWhatsapp,
@@ -122,6 +149,43 @@ export class CreateOrderUseCase {
       orderPublicId: order.publicId,
       checkoutUrl: checkout.checkoutUrl,
       paymentId: payment.id,
+    };
+  }
+
+  /**
+   * Determine the order's coarse-city `locationId` plus the lat/lng to persist. Precise mode upserts
+   * the city (by slug) from the resolved Google place and uses the precise coordinates; fallback
+   * mode validates the chosen city and uses its centroid.
+   */
+  private async resolveLocation(
+    db: PrismaClient,
+    input: CreateOrderInput,
+  ): Promise<{ locationId: string; latitude: number; longitude: number }> {
+    if (input.place) {
+      const { city, state, latitude, longitude } = input.place;
+      const slug = deriveCitySlug(city, state);
+      // Upsert the coarse city so the FK resolves. Do NOT write placeId here — it's unique on
+      // Location and belongs to the precise point (stored on the Order), not the city.
+      const location = await db.location.upsert({
+        where: { slug },
+        create: { slug, city, state, latitude, longitude },
+        update: {},
+        select: { id: true },
+      });
+      return { locationId: location.id, latitude, longitude };
+    }
+
+    if (!input.locationId) throw new Error("Localização inválida.");
+    const location = await db.location.findUnique({
+      where: { id: input.locationId },
+      select: { id: true, latitude: true, longitude: true },
+    });
+    if (!location) throw new Error("Localização inválida.");
+    return {
+      locationId: location.id,
+      // Seeded capitals always have a centroid; fall back to 0/0 defensively if not.
+      latitude: location.latitude ?? 0,
+      longitude: location.longitude ?? 0,
     };
   }
 }

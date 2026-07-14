@@ -128,6 +128,15 @@ model Order {
     locationId String
     location   Location @relation(fields: [locationId], references: [id])
 
+    // Precise, per-order address (Google Places). The coarse city stays on the Location FK above.
+    // latitude/longitude are ALWAYS populated (precise point when available, else city centroid) so
+    // every order is radius-filterable. placeId is intentionally NOT unique — reuse is allowed.
+    addressLine  String?
+    neighborhood String?
+    latitude     Float?
+    longitude    Float?
+    placeId      String?
+
     // Contact details — NEVER exposed by public/browse queries; only via ContactUnlock.
     contactName     String
     contactPhone    String

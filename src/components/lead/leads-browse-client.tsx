@@ -6,18 +6,37 @@ import { useState } from "react";
 
 import { Badge, Chip } from "~/components/ui/badge";
 import { Input } from "~/components/ui/input";
+import {
+  LocationAutocomplete,
+  type ResolvedPlace,
+} from "~/components/ui/location-autocomplete";
 import { MultiSelect } from "~/components/ui/multi-select";
+import { env } from "~/env";
 import { formatCurrency } from "~/lib/currency";
 import { api } from "~/trpc/react";
 
+const RADIUS_OPTIONS = [10, 25, 50, 100];
+
 export function LeadsBrowseClient() {
+  const placesEnabled = env.NEXT_PUBLIC_ENABLE_GOOGLE_PLACES;
   const [search, setSearch] = useState("");
   const [categorySlugs, setCategorySlugs] = useState<string[]>([]);
+  const [center, setCenter] = useState<ResolvedPlace | null>(null);
+  const [radiusKm, setRadiusKm] = useState(25);
+  const [locationSlug, setLocationSlug] = useState("");
 
   const { data: categories } = api.catalog.categories.useQuery();
+  const { data: locations } = api.location.popular.useQuery(undefined, {
+    enabled: !placesEnabled,
+  });
   const { data, isLoading } = api.lead.list.useQuery({
     search: search || undefined,
     categorySlugs: categorySlugs.length ? categorySlugs : undefined,
+    // Radius search (Places) takes precedence over the coarse city slug (fallback).
+    lat: placesEnabled && center ? center.latitude : undefined,
+    lng: placesEnabled && center ? center.longitude : undefined,
+    radiusKm: placesEnabled && center ? radiusKm : undefined,
+    locationSlug: !placesEnabled && locationSlug ? locationSlug : undefined,
   });
 
   return (
@@ -43,7 +62,7 @@ export function LeadsBrowseClient() {
           />
         </div>
       </div>
-      <div className="mb-6">
+      <div className="mb-4">
         <MultiSelect
           options={(categories ?? []).map((c) => ({
             value: c.slug,
@@ -54,6 +73,56 @@ export function LeadsBrowseClient() {
           placeholder="Filtrar por categorias…"
           emptyLabel="Nenhuma categoria encontrada."
         />
+      </div>
+
+      {/* Location filter: precise radius (Places) or coarse city (fallback). */}
+      <div className="mb-6 flex flex-wrap items-center gap-3">
+        {placesEnabled ? (
+          <>
+            <div className="min-w-[260px] flex-1">
+              <LocationAutocomplete
+                value={center?.formattedAddress}
+                onSelect={setCenter}
+                placeholder="Buscar perto de um endereço…"
+              />
+            </div>
+            {center && (
+              <>
+                <select
+                  value={radiusKm}
+                  onChange={(e) => setRadiusKm(Number(e.target.value))}
+                  className="rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-3 text-body-md outline-none focus:ring-2 focus:ring-primary"
+                >
+                  {RADIUS_OPTIONS.map((km) => (
+                    <option key={km} value={km}>
+                      até {km} km
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  onClick={() => setCenter(null)}
+                  className="text-label-lg text-primary hover:underline"
+                >
+                  Limpar
+                </button>
+              </>
+            )}
+          </>
+        ) : (
+          <select
+            value={locationSlug}
+            onChange={(e) => setLocationSlug(e.target.value)}
+            className="min-w-[260px] rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-3 text-body-md outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="">Todas as cidades</option>
+            {(locations ?? []).map((l) => (
+              <option key={l.id} value={l.slug}>
+                {l.city} — {l.state}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
 
       {/* Grid */}
@@ -88,6 +157,11 @@ export function LeadsBrowseClient() {
                 <p className="mt-1 flex items-center gap-1 text-body-sm text-on-surface-variant">
                   <MapPin className="h-4 w-4" />
                   {lead.location.city}/{lead.location.state}
+                  {lead.distanceKm != null && (
+                    <span className="text-outline">
+                      · {lead.distanceKm.toFixed(1)} km
+                    </span>
+                  )}
                 </p>
                 <p className="mt-3 line-clamp-2 text-body-sm text-on-surface-variant">
                   {lead.description}

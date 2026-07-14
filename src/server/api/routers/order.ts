@@ -24,12 +24,29 @@ const createOrderInput = z.object({
     .array(z.string().min(1))
     .min(1, "Escolha ao menos uma categoria.")
     .max(5, "Escolha no máximo 5 categorias."),
-  locationId: z.string().min(1),
+  // Coarse city FK (fallback dropdown). Optional when a precise `place` is provided instead.
+  locationId: z.string().min(1).optional(),
+  // Precise address from Google Places (autocomplete mode). The server upserts the coarse city
+  // from city/state so the required Location FK is always satisfied.
+  place: z
+    .object({
+      placeId: z.string().min(1),
+      formattedAddress: z.string().min(1),
+      latitude: z.number(),
+      longitude: z.number(),
+      city: z.string().min(1),
+      state: z.string().min(1),
+      neighborhood: z.string().optional(),
+    })
+    .optional(),
   contactName: z.string().min(2).max(120),
   contactPhone: z.string().min(8).max(20),
   contactWhatsapp: z.string().max(20).optional(),
   contactEmail: z.string().email("E-mail inválido."),
   durationTierId: z.string().min(1),
+}).refine((v) => Boolean(v.locationId) || Boolean(v.place), {
+  message: "Informe uma localização.",
+  path: ["locationId"],
 });
 
 export const orderRouter = createTRPCRouter({

@@ -1,6 +1,7 @@
 import { catalogRouter } from "~/server/api/routers/catalog";
 import { healthRouter } from "~/server/api/routers/health";
 import { leadRouter } from "~/server/api/routers/lead";
+import { locationRouter } from "~/server/api/routers/location";
 import { orderRouter } from "~/server/api/routers/order";
 import { walletRouter } from "~/server/api/routers/wallet";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
@@ -16,6 +17,7 @@ export const appRouter = createTRPCRouter({
   order: orderRouter,
   wallet: walletRouter,
   lead: leadRouter,
+  location: locationRouter,
 });
 
 // export type definition of API
