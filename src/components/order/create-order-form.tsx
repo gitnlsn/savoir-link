@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import { CurrencyInput } from "~/components/ui/currency-input";
 import { Input, Label, Textarea } from "~/components/ui/input";
 import { formatCents } from "~/lib/currency";
 import { cn } from "~/lib/utils";
@@ -34,7 +35,7 @@ export function CreateOrderForm({
   const [durationTierId, setDurationTierId] = useState(tiers[1]?.id ?? tiers[0]?.id ?? "");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [budget, setBudget] = useState("");
+  const [budget, setBudget] = useState(0);
   const [contactName, setContactName] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   const [contactWhatsapp, setContactWhatsapp] = useState("");
@@ -51,7 +52,7 @@ export function CreateOrderForm({
     create.mutate({
       title,
       description,
-      budget: Number(budget),
+      budget,
       categoryId,
       locationId,
       contactName,
@@ -131,15 +132,11 @@ export function CreateOrderForm({
             </select>
           </div>
           <div>
-            <Label htmlFor="budget">Orçamento estimado (R$)</Label>
-            <Input
+            <Label htmlFor="budget">Orçamento estimado</Label>
+            <CurrencyInput
               id="budget"
-              type="number"
-              min="1"
-              step="0.01"
               value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              placeholder="500"
+              onValueChange={setBudget}
               required
             />
           </div>
@@ -235,7 +232,7 @@ export function CreateOrderForm({
         type="submit"
         size="lg"
         className="w-full"
-        disabled={create.isPending || !categoryId}
+        disabled={create.isPending || !categoryId || budget <= 0}
       >
         {create.isPending ? "Processando..." : "Publicar e pagar"}
       </Button>
