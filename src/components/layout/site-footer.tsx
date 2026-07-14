@@ -30,6 +30,7 @@ export function SiteFooter() {
         <FooterCol
           title="Institucional"
           links={[
+            ["Blog", "/blog"],
             ["Termos de uso", "/termos"],
             ["Privacidade", "/privacidade"],
           ]}
