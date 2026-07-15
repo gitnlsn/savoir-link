@@ -20,7 +20,13 @@ export const metadata: Metadata = {
   description:
     "Publique seu pedido de serviço e receba contato de profissionais qualificados. Profissionais: encontre clientes prontos para contratar.",
   metadataBase: new URL(process.env.APP_URL ?? "http://localhost:3000"),
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.ico", sizes: "any" },
+    { rel: "icon", url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+    { rel: "icon", url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180" },
+  ],
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "pt_BR",
