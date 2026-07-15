@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import {
   JsonLd,
@@ -9,6 +10,7 @@ import {
   webSiteSchema,
 } from "~/components/seo/json-ld";
 import { TRPCReactProvider } from "~/trpc/react";
+import { env } from "~/env";
 
 export const metadata: Metadata = {
   title: {
@@ -44,6 +46,9 @@ export default function RootLayout({
         <JsonLd data={organizationSchema()} />
         <JsonLd data={webSiteSchema()} />
         <TRPCReactProvider>{children}</TRPCReactProvider>
+        {env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics gaId={env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
       </body>
     </html>
   );

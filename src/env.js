@@ -61,6 +61,7 @@ export const env = createEnv({
       .transform((val) => val === "true")
       .default("false"),
     NEXT_PUBLIC_GTM_ID: z.string().optional(),
+    NEXT_PUBLIC_GA_MEASUREMENT_ID: z.string().optional(),
     NEXT_PUBLIC_CURRENCY: z.string().length(3).default("BRL"),
     NEXT_PUBLIC_CURRENCY_LOCALE: z.string().default("pt-BR"),
   },
@@ -100,6 +101,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ENABLE_GOOGLE_PLACES:
       process.env.NEXT_PUBLIC_ENABLE_GOOGLE_PLACES,
     NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+    NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
     NEXT_PUBLIC_CURRENCY: process.env.CURRENCY,
     NEXT_PUBLIC_CURRENCY_LOCALE: process.env.CURRENCY_LOCALE,
   },
