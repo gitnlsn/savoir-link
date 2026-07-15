@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Badge, Chip } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import { trackContactClick, trackUnlockContact } from "~/lib/analytics";
 import { formatCurrency } from "~/lib/currency";
 import { api } from "~/trpc/react";
 
@@ -14,6 +15,7 @@ export function LeadDetailClient({ publicId }: { publicId: string }) {
   const { data, isLoading } = api.lead.detail.useQuery({ publicId });
   const unlock = api.lead.unlock.useMutation({
     onSuccess: () => {
+      trackUnlockContact({ category: data?.order.categories[0]?.slug });
       void utils.lead.detail.invalidate({ publicId });
       void utils.wallet.get.invalidate();
     },
@@ -82,6 +84,7 @@ export function LeadDetailClient({ publicId }: { publicId: string }) {
             </p>
             <a
               href={`tel:${contact.phone}`}
+              onClick={() => trackContactClick("phone")}
               className="flex items-center gap-2 text-primary hover:underline"
             >
               <Phone className="h-4 w-4" /> {contact.phone}
@@ -91,6 +94,7 @@ export function LeadDetailClient({ publicId }: { publicId: string }) {
                 href={`https://wa.me/${contact.whatsapp.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => trackContactClick("whatsapp")}
                 className="flex items-center gap-2 text-secondary hover:underline"
               >
                 <MessageCircle className="h-4 w-4" /> {contact.whatsapp}
@@ -98,6 +102,7 @@ export function LeadDetailClient({ publicId }: { publicId: string }) {
             )}
             <a
               href={`mailto:${contact.email}`}
+              onClick={() => trackContactClick("email")}
               className="flex items-center gap-2 text-primary hover:underline"
             >
               <Mail className="h-4 w-4" /> {contact.email}

@@ -4,6 +4,7 @@ import { ArrowDownCircle, ArrowUpCircle, Wallet } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
+import { trackBuyCredits } from "~/lib/analytics";
 import { formatCents } from "~/lib/currency";
 import { api } from "~/trpc/react";
 
@@ -56,7 +57,14 @@ export function WalletClient({ packages }: { packages: Package[] }) {
               <Button
                 className="mt-4 w-full"
                 disabled={topup.isPending}
-                onClick={() => topup.mutate({ packageId: p.id })}
+                onClick={() => {
+                  trackBuyCredits({
+                    packageId: p.id,
+                    credits: p.credits,
+                    priceCents: p.priceCents,
+                  });
+                  topup.mutate({ packageId: p.id });
+                }}
               >
                 Comprar
               </Button>

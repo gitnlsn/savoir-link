@@ -12,6 +12,7 @@ import {
 } from "~/components/ui/location-autocomplete";
 import { MultiSelect } from "~/components/ui/multi-select";
 import { env } from "~/env";
+import { trackPublishOrder } from "~/lib/analytics";
 import { maskContactInfo } from "~/lib/contact-mask";
 import { formatCents } from "~/lib/currency";
 import { cn } from "~/lib/utils";
@@ -54,6 +55,12 @@ export function CreateOrderForm({
 
   const create = api.order.create.useMutation({
     onSuccess: (res) => {
+      trackPublishOrder({
+        numCategories: categoryIds.length,
+        budgetCents: budget,
+        durationTierId,
+        locationMode: place ? "places" : "select",
+      });
       window.location.href = res.checkoutUrl;
     },
   });
