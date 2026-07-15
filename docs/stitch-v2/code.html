@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Savoir Link | Profissionais qualificados na sua região</title>
+<!-- Font: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e1e2e8",
+                    "surface-tint": "#2551d8",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "on-secondary-container": "#dfe3ff",
+                    "tertiary-container": "#005a3c",
+                    "outline-variant": "#c4c5d7",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e1e2e8",
+                    "on-secondary-fixed": "#001452",
+                    "inverse-primary": "#b7c4ff",
+                    "on-tertiary-fixed": "#002113",
+                    "on-background": "#191c20",
+                    "surface-container-high": "#e7e8ee",
+                    "secondary": "#003ec6",
+                    "outline": "#747686",
+                    "on-secondary-fixed-variant": "#0038b6",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#7bd1a6",
+                    "on-error-container": "#93000a",
+                    "inverse-on-surface": "#eff0f6",
+                    "tertiary-fixed-dim": "#81d8ad",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c20",
+                    "on-primary-container": "#adbcff",
+                    "primary-fixed": "#dde1ff",
+                    "primary-fixed-dim": "#b7c4ff",
+                    "secondary-container": "#0052fe",
+                    "on-primary-fixed": "#001452",
+                    "primary-container": "#003ec7",
+                    "secondary-fixed": "#dde1ff",
+                    "surface-dim": "#d8dae0",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "primary": "#002b92",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#b7c4ff",
+                    "on-primary-fixed-variant": "#0038b6",
+                    "surface-container": "#eceef3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#434654",
+                    "tertiary": "#00402a",
+                    "inverse-surface": "#2e3135",
+                    "tertiary-fixed": "#9df4c8",
+                    "background": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f2f3f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "2rem",
+                    "xs": "0.25rem",
+                    "gutter": "24px",
+                    "md": "1rem",
+                    "xxl": "4rem",
+                    "margin-desktop": "32px",
+                    "sm": "0.5rem",
+                    "lg": "1.5rem",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Manrope"],
+                    "caption": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "headline-xl": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-header {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .blob-bg {
+        filter: blur(80px);
+        opacity: 0.15;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      .animate-float {
+        animation: float 4s ease-in-out infinite;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Header Navigation -->
+<header class="sticky top-0 w-full z-50 bg-white/80 dark:bg-surface/80 glass-header border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-[1280px] mx-auto">
+<!-- Brand Logo -->
+<a class="flex items-center gap-2 group" href="/">
+<img alt="Savoir Link Logo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7TcbcrJ13gCy0qTnsxki9XN6tINt63Nmux54WelTfvvzQ_PAI2qQ766Gu0Z2HHDXRsGGhkEhvOaOXE6_4jEk6nviGlUyp6AuMQPvCAfJZriZ-RwefDA4pYBz_cHXvZtmaspvzGJV_HsvfwQBOyYF4BJEIb7v_gGpgYdrFetWYn08ap7T5q58POKXa9RS1C7k47jHzXQEIB8y3x4G1LdKnx34OvJR7H6WtQbqQrp6kA7BDJPSty8PLBV-9toC0UKWR-rKDAT8CxzM3"/>
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed tracking-tight">Savoir Link</span>
+</a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-xl">
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary hover:opacity-90 transition-opacity" href="#">Pedidos</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Como funciona</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Preços</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors" href="#">Sou profissional</a>
+</nav>
+<!-- CTA -->
+<div class="flex items-center">
+<button class="bg-primary hover:opacity-90 text-on-primary font-label-md text-label-md px-lg py-3 rounded-full shadow-md active:scale-95 transition-all">
+                    Publicar pedido
+                </button>
+</div>
+</div>
+</header>
+<main class="relative overflow-hidden">
+<!-- Background Blur Decor -->
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary rounded-full blob-bg -mr-32 -mt-32"></div>
+<div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-secondary rounded-full blob-bg -ml-16 mb-32 opacity-10"></div>
+<!-- Hero Section -->
+<section class="max-w-[1280px] mx-auto px-margin-desktop py-xxl md:py-32 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<!-- Content Column -->
+<div class="flex flex-col gap-lg">
+<h1 class="font-headline-xl text-headline-xl text-on-surface max-w-xl">
+                        Encontre o profissional certo para o seu serviço
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        Publique seu pedido e receba contato de profissionais qualificados da sua região. Rápido, simples e seguro.
+                    </p>
+<!-- Hero Buttons -->
+<div class="flex flex-col sm:flex-row items-center gap-md mt-md">
+<button class="w-full sm:w-auto bg-primary hover:opacity-90 text-on-primary font-label-md text-label-md px-xxl py-4 rounded-full shadow-lg active:scale-95 transition-all">
+                            Publicar um pedido
+                        </button>
+<button class="w-full sm:w-auto border-2 border-primary text-primary hover:bg-primary/5 font-label-md text-label-md px-xxl py-4 rounded-full active:scale-95 transition-all">
+                            Sou profissional
+                        </button>
+</div>
+<!-- Trust Chips -->
+<div class="flex flex-wrap items-center gap-md mt-lg">
+<div class="flex items-center gap-2 bg-surface-container-low px-md py-sm rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">timer</span>
+<span class="font-caption text-caption text-on-surface-variant">Leva menos de 2 minutos</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-md py-sm rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">payments</span>
+<span class="font-caption text-caption text-on-surface-variant">Publicação a partir de R$5</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low px-md py-sm rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span class="font-caption text-caption text-on-surface-variant">Sem mensalidade para profissionais</span>
+</div>
+</div>
+</div>
+<!-- Visual Column (Asymmetric Illustration) -->
+<div class="relative hidden md:block h-[500px]">
+<!-- Central Pedido Card -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-72 bg-surface-container-lowest p-lg rounded-xl shadow-xl border border-outline-variant/10 animate-float">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">assignment</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Reforma de Sala</h3>
+<p class="font-caption text-caption text-on-surface-variant">São Paulo, SP</p>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full w-2/3 bg-primary rounded-full"></div>
+</div>
+<p class="font-caption text-caption text-primary">Aguardando contatos (3/5)</p>
+</div>
+</div>
+<!-- Matching Professional Card 1 -->
+<div class="absolute top-12 right-0 z-20 w-64 bg-white p-md rounded-xl shadow-lg border border-outline-variant/10 -rotate-3 hover:rotate-0 transition-transform duration-500">
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Professional profile photo of a smiling contractor wearing a clean polo shirt and holding a clipboard, warm natural office lighting, blurred home renovation background, professional corporate portrait style, soft blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVQTL3Di_WQs8pFTGOaQ6eH6gsEDuJK-YUIyE6yx86XAA4M7CTF7ZeERvDz-9xgDvihxW4gi7sp6PMUQqlW28K_x6UADFvmEHRCTH2i-p2jS_KSCVE9MXPQOeR_mayz3F8Id1fvq8t8xAs9EIiywWox2Fy1OMVsfjCh9tnMBdt-NjocAD3k3xvNv34VUPH-cqCIdfqPHbrYJu20Gx0OojnmSQlvWvgmSxEgsulxnl-8N7QrOXqqlwi3TrvOFZLY9KrWykD22weaiQu"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Ricardo Silva</h4>
+<span class="flex items-center gap-1 text-[12px] font-bold text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span> 4.9
+                                    </span>
+</div>
+<p class="text-[12px] text-on-surface-variant">Mestre de Obras</p>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-[10px] uppercase tracking-wider font-bold text-on-tertiary-fixed-variant bg-tertiary-fixed/30 px-2 py-1 rounded">Disponível</span>
+<span class="text-[10px] text-on-surface-variant">A 5km de você</span>
+</div>
+</div>
+<!-- Matching Professional Card 2 -->
+<div class="absolute bottom-12 left-4 z-20 w-64 bg-white p-md rounded-xl shadow-lg border border-outline-variant/10 rotate-3 hover:rotate-0 transition-transform duration-500">
+<div class="flex items-center gap-md">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a female architect in a bright modern studio environment, soft natural sunlight, professional attire, looking confident and approachable, high-end corporate aesthetic with blue and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTBkgOZmFs1-3obykhtqwOTyAz5drVoOpmDJzCmFHU89dgYkV_dGDtc99JXkefqCfZ-mV6_i-pN18y8hPKC6mhD0H0l2YzMBiJie9cs943ce4gEmYQGHA-NsH16329b5-FoeoYqI4gfiI-pVTuoAZv09l8v2lweE4evfZ3mV0JUYZ_eRUa0vHgSPSLgQ283V7mlFOWM2gdmJDt8nr9_Q6F7IeIhORFOuvjVLplZTbuIsOrN_m5eWGk2Ia3yUOBvgPdsHAY3x9i-BJF"/>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Ana Mendes</h4>
+<span class="flex items-center gap-1 text-[12px] font-bold text-tertiary">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span> 5.0
+                                    </span>
+</div>
+<p class="text-[12px] text-on-surface-variant">Arquiteta de Interiores</p>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant/20">
+<div class="flex gap-1">
+<span class="text-[10px] bg-secondary/5 text-secondary px-2 py-1 rounded-full border border-secondary/10">Reforma</span>
+<span class="text-[10px] bg-secondary/5 text-secondary px-2 py-1 rounded-full border border-secondary/10">Design</span>
+</div>
+</div>
+</div>
+<!-- Connecting Lines Decoration (Visualizing the "Link") -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 500 500">
+<path class="text-primary/20" d="M250,250 C350,150 400,150 450,100" fill="none" stroke="currentColor" stroke-dasharray="8 4" stroke-width="2"></path>
+<path class="text-primary/20" d="M250,250 C150,350 100,350 50,400" fill="none" stroke="currentColor" stroke-dasharray="8 4" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</section><!-- Trust Bar -->
+<section class="bg-surface-container-lowest border-y border-outline-variant/20 py-lg">
+<div class="max-w-[1280px] mx-auto px-margin-desktop">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-lg">
+<div class="flex items-center gap-md justify-center md:justify-start">
+<span class="material-symbols-outlined text-primary">task_alt</span>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">+500k</span>
+<span class="text-caption text-on-surface-variant">Pedidos publicados</span>
+</div>
+</div>
+<div class="flex items-center gap-md justify-center md:justify-start">
+<span class="material-symbols-outlined text-primary">engineering</span>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">+100k</span>
+<span class="text-caption text-on-surface-variant">Profissionais ativos</span>
+</div>
+</div>
+<div class="flex items-center gap-md justify-center md:justify-start">
+<span class="material-symbols-outlined text-primary">category</span>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">50+</span>
+<span class="text-caption text-on-surface-variant">Categorias de serviço</span>
+</div>
+</div>
+<div class="flex items-center gap-md justify-center md:justify-start">
+<span class="material-symbols-outlined text-primary">public</span>
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">100%</span>
+<span class="text-caption text-on-surface-variant">Atendimento em todo o Brasil</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Popular Categories Section -->
+<section class="max-w-[1280px] mx-auto px-margin-desktop py-xxl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-32">Categorias populares</h2>
+<div class="flex flex-wrap gap-md">
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">home_repair_service</span>
+<span class="font-label-md">Reformas e Reparos</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="font-label-md">Eletricista</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">plumbing</span>
+<span class="font-label-md">Encanador</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">format_paint</span>
+<span class="font-label-md">Pintura</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">cleaning_services</span>
+<span class="font-label-md">Diarista e Limpeza</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">devices</span>
+<span class="font-label-md">Assistência Técnica</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+<span class="font-label-md">Fotografia</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">school</span>
+<span class="font-label-md">Aulas Particulares</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">content_cut</span>
+<span class="font-label-md">Beleza e Estética</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">handyman</span>
+<span class="font-label-md">Marido de Aluguel</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">potted_plant</span>
+<span class="font-label-md">Jardinagem</span>
+</a>
+<a class="flex items-center gap-2 bg-white border border-outline-variant/30 px-lg py-3 rounded-full hover:border-primary hover:text-primary transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+<span class="font-label-md">Mudanças</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl bg-surface-container-low border-t border-outline-variant">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-[1280px] mx-auto gap-md">
+<div class="flex items-center gap-2">
+<img alt="Savoir Link Logo" class="h-8 w-auto grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7TcbcrJ13gCy0qTnsxki9XN6tINt63Nmux54WelTfvvzQ_PAI2qQ766Gu0Z2HHDXRsGGhkEhvOaOXE6_4jEk6nviGlUyp6AuMQPvCAfJZriZ-RwefDA4pYBz_cHXvZtmaspvzGJV_HsvfwQBOyYF4BJEIb7v_gGpgYdrFetWYn08ap7T5q58POKXa9RS1C7k47jHzXQEIB8y3x4G1LdKnx34OvJR7H6WtQbqQrp6kA7BDJPSty8PLBV-9toC0UKWR-rKDAT8CxzM3"/>
+<span class="font-headline-md text-headline-md font-bold text-on-surface opacity-50">Savoir Link</span>
+</div>
+<nav class="flex flex-wrap justify-center gap-lg">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Termos de Uso</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacidade</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Ajuda</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Blog</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Carreiras</a>
+</nav>
+<span class="font-body-md text-body-md text-on-surface-variant">
+                © 2024 Savoir Link. Todos os direitos reservados.
+            </span>
+</div>
+</footer>
+<script>
+        // Micro-interaction for primary buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                if (button.classList.contains('bg-primary')) {
+                    button.style.transform = 'translateY(-2px)';
+                    button.style.boxShadow = '0 12px 32px rgba(0, 43, 146, 0.2)';
+                }
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'translateY(0)';
+                button.style.boxShadow = '';
+            });
+        });
+    </script>
+</body></html>

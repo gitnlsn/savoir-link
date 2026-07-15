@@ -18,13 +18,13 @@ export function SiteHeader() {
             Pedidos
           </Link>
           <Link
-            href="/como-funciona"
+            href="/#como-funciona"
             className="text-label-lg text-on-surface-variant transition-colors hover:text-primary"
           >
             Como funciona
           </Link>
           <Link
-            href="/precos"
+            href="/#precos"
             className="text-label-lg text-on-surface-variant transition-colors hover:text-primary"
           >
             Preços

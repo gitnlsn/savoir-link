@@ -107,6 +107,7 @@
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
   body {
     background-color: var(--color-background);
@@ -119,4 +120,33 @@
 .glass-header {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+/* Landing hero — decorative blurred colour blobs (from docs/stitch-v2) */
+.blob-bg {
+  filter: blur(80px);
+  opacity: 0.15;
+}
+
+/* Landing hero — gently floating illustration cards */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
